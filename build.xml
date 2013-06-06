@@ -178,7 +178,7 @@
 		<property name="compress_source_dir" value="${release_temp_dir}/${plugin_name}" />
 		<property name="compress_destination_file" value="${release_dir}/${plugin_name}" />
 		<property name="compress_includes" value="**" />
-		<property name="compress_excludes" value="${release_temp_dir}/${plugin_name}/database/**" />
+		<property name="compress_excludes" value="${compress_source_dir}/database/**" />
 
 		<echo message="${compress_source_dir}" />
 		<echo message="${compress_destination_file}" />
@@ -187,7 +187,6 @@
 
 		<zip basedir="${compress_source_dir}"
 				 destfile="${compress_destination_file}.zip"
-				 includes="${compress_includes}"
 				 excludes="${compress_excludes}"
 				 whenempty="skip" />
 	</target>
