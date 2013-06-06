@@ -21,6 +21,7 @@
  </target>
 
  <target name="clean" description="Cleanup build artifacts">
+	<echo message="${plugin_name}" />
   <delete dir="${basedir}/build/api"/>
   <delete dir="${basedir}/build/code-browser"/>
   <delete dir="${basedir}/build/coverage"/>
