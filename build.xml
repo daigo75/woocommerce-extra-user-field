@@ -180,6 +180,11 @@
 		<property name="compress_includes" value="${release_temp_dir}/${plugin_name}/**" />
 		<property name="compress_excludes" value="${release_temp_dir}/${plugin_name}/database/**" />
 
+		<echo message="${compress_source_dir}" />
+		<echo message="${compress_destination_file}" />
+		<echo message="${compress_includes}" />
+		<echo message="${compress_excludes}" />
+
 		<zip basedir="${compress_source_dir}"
 				 destfile="${compress_destination_file}.zip"
 				 includes="${compress_includes}"
