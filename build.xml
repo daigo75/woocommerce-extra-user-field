@@ -180,6 +180,7 @@
 		<property name="compress_includes" value="**" />
 		<property name="compress_excludes" value="${compress_source_dir}/database/**" />
 
+		<echo message="${release_dir}" />
 		<echo message="${compress_source_dir}" />
 		<echo message="${compress_destination_file}" />
 		<echo message="${compress_includes}" />
