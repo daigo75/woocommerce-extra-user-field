@@ -161,7 +161,7 @@
 
 	<!-- Prepare release files -->
 	<target name="prepare-release" depends="phpunit" description="Produce a release package">
-		<tempfile property="release_temp_dir" suffix=".tmp" deleteonexit="true" />
+		<tempfile property="release_temp_dir" suffix=".tmp" deleteonexit="false" />
 		<property name="plugin_dir" value="${basedir}" />
 		<property name="plugin_name" value="${ant.project.name}" />
 
