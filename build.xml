@@ -177,8 +177,8 @@
 		<!-- Compress files into a release package -->
 		<property name="compress_source_dir" value="${release_temp_dir}/${plugin_name}" />
 		<property name="compress_destination_file" value="${release_dir}/${plugin_name}" />
-		<property name="compress_includes" value="${plugin_name}/**" />
-		<property name="compress_excludes" value="${plugin_name}/database/**" />
+		<property name="compress_includes" value="${release_temp_dir}/${plugin_name}/**" />
+		<property name="compress_excludes" value="${release_temp_dir}/${plugin_name}/database/**" />
 
 		<zip basedir="${compress_source_dir}"
 				 destfile="${compress_destination_file}.zip"
