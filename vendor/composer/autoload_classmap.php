@@ -6,8 +6,8 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'IWC_Aelia_Plugin' => $baseDir . '/src/lib/classes/base/wc-aelia-plugin.php',
-    'WC_Aelia_Messages' => $baseDir . '/src/lib/classes/base/wc-aelia-messages.php',
-    'WC_Aelia_Plugin' => $baseDir . '/src/lib/classes/base/wc-aelia-plugin.php',
+    'IWC_Aelia_Plugin' => $baseDir . '/src/lib/classes/base/plugin/wc-aelia-plugin.php',
+    'WC_Aelia_Messages' => $baseDir . '/src/lib/classes/base/messages/wc-aelia-messages.php',
+    'WC_Aelia_Plugin' => $baseDir . '/src/lib/classes/base/plugin/wc-aelia-plugin.php',
     'WC_Aelia_Settings' => $baseDir . '/src/lib/classes/base/settings/wc-aelia-settings.php',
 );
