@@ -26,8 +26,8 @@ class WC_Aelia_Messages {
 	/**
 	 * Loads all the error message used by the plugin.
 	 */
-	protected function load_error_messages() {
-		$this->add_error_message($this->_text_domain, __('File not found: "%s".', AELIA_CS_PLUGIN_TEXTDOMAIN));
+	public function load_error_messages() {
+		$this->add_error_message(self::ERR_FILE_NOT_FOUND, __('File not found: "%s".', $this->_text_domain));
 	}
 
 	/**
@@ -36,7 +36,7 @@ class WC_Aelia_Messages {
 	 * @param mixed error_code The Error Code.
 	 * @param string error_message The Error Message.
 	 */
-	protected function add_error_message($error_code, $error_message) {
+	public function add_error_message($error_code, $error_message) {
 		$this->_wp_error->add($error_code, $error_message);
 	}
 

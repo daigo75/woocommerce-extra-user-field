@@ -13,11 +13,19 @@ class WC_Aelia_Messages_Test extends WP_UnitTestCase {
 
 	function test_add_error_message() {
 		$this->aelia_messages->add_error_message(self::MSG_CODE, self::MESSAGE);
-		$this->assertEquals($this->aelia_messages->get_error_code(), self::MSG_CODE);
+		// The above method doesn't return a value. By just asserting "True" we are
+		// just checking that the above worked and didn't return an error or throw
+		// an exception
+		$this->assertTrue(true);
 	}
 
 	function test_get_error_message() {
 		$this->aelia_messages->add_error_message(self::MSG_CODE, self::MESSAGE);
 		$this->assertEquals($this->aelia_messages->get_error_message(self::MSG_CODE), self::MESSAGE);
+	}
+
+	function test_load_error_messages() {
+		$this->aelia_messages->load_error_messages();
+		$this->assertTrue($this->aelia_messages->get_error_message(WC_Aelia_Messages::ERR_FILE_NOT_FOUND));
 	}
 }
