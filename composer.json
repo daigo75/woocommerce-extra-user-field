@@ -1,5 +1,8 @@
 {
 	"autoload" : {
 		"classmap": ["src/lib/classes/"]
-	}
+	},
+	"require-dev": {
+    "mockery/mockery": "dev-master@dev"
+  }
 }
