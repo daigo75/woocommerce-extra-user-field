@@ -8,8 +8,24 @@ interface IWC_Aelia_Plugin {
  * Implements a base plugin class to be used to implement WooCommerce plugins.
  */
 abstract class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
-	// @var WC_Aelia_CurrencySwitcher_Settings The object that will manipulate plugin's settings.
+	// @var string The plugin slug
+	const PLUGIN_SLUG = 'aelia-template-plugin';
+
+	// @var WC_Aelia_Settings The object that will handle plugin's settings.
 	protected $_settings_controller;
+	// @var WC_Aelia_Messages The object that will handle plugin's messages.
+	protected $_messages_controller;
+
+	// @var string The instance key that identifies the plugin
+	const INSTANCE_KEY = null;
+
+	protected $paths = array(
+		// This array will contain the paths used by the plugin
+	);
+
+	protected $urls = array(
+		// This array will contain the URLs used by the plugin
+	);
 
 	/**
 	 * Returns global instance of woocommerce.
@@ -24,54 +40,66 @@ abstract class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	/**
 	 * Returns the instance of the Settings Controller used by the plugin.
 	 *
-	 * @return WC_Aelia_CurrencySwitcher_Settings.
+	 * @return WC_Aelia_Settings.
 	 */
 	public function settings_controller() {
 		return $this->_settings_controller;
 	}
 
 	/**
+	 * Returns the instance of the Messages Controller used by the plugin.
+	 *
+	 * @return WC_Aelia_Messages.
+	 */
+	public function messages_controller() {
+		return $this->_messages_controller;
+	}
+
+	/**
 	 * Returns the instance of the plugin.
 	 *
-	 * @return WC_Aelia_CurrencySwitcher.
+	 * @return WC_Aelia_Plugin.
 	 */
 	public static function instance() {
-		return $GLOBALS[WC_Aelia_CurrencySwitcher::INSTANCE_KEY];
+		return $GLOBALS[self::INSTANCE_KEY];
 	}
 
 	/**
 	 * Returns the Settings Controller used by the plugin.
 	 *
-	 * @return WC_Aelia_CurrencySwitcher_Settings.
+	 * @return WC_Aelia_Settings.
 	 */
 	public static function settings() {
 		return self::instance()->settings_controller();
 	}
 
 	/**
-	 * Registers an error message in the internal WP_Error object.
+	 * Returns the Messages Controller used by the plugin.
+	 *
+	 * @return WC_Aelia_Messages.
+	 */
+	public static function messages() {
+		return self::instance()->messages_controller();
+	}
+
+	/**
+	 * Registers an error message in the internal Messages object.
 	 *
 	 * @param mixed error_code The Error Code.
 	 * @param string error_message The Error Message.
 	 */
 	protected function add_error_message($error_code, $error_message) {
-		$this->_wp_error->add($error_code, $error_message);
+		$this->_messages_controller->add_error_message($error_code, $error_message);
 	}
 
 	/**
-	 * Retrieves an error message from the internal WP_Error object.
+	 * Retrieves an error message from the internal Messages object.
 	 *
 	 * @param mixed error_code The Error Code.
 	 * @return string The Error Message corresponding to the specified Code.
 	 */
 	public function get_error_message($error_code) {
-		return $this->_wp_error->get_error_message($error_code);
-	}
-
-	/**
-	 * Loads all the error message used by the plugin.
-	 */
-	protected function load_error_messages() {
+		return $this->_messages_controller->get_error_message($error_code);
 	}
 
 	/**
@@ -81,12 +109,21 @@ abstract class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	 * @param int error_type The type of Error to raise.
 	 * @param array error_args An array of arguments to pass to the vsprintf()
 	 * function which will format the error message.
+	 * @param bool show_backtrace Indicates if a backtrace should be displayed
+	 * after the error message.
 	 * @return string The formatted error message.
 	 */
-	protected function trigger_error($error_code, $error_type = E_NOTICE, array $error_args = array()) {
+	protected function trigger_error($error_code, $error_type = E_USER_NOTICE, array $error_args = array(), $show_backtrace = false) {
 		$error_message = $this->get_error_message($error_code);
 
-		return trigger_error(vsprintf($error_message, $error_args), $error_type);
+		$message = vsprintf($error_message, $error_args);
+		if($show_backtrace) {
+			$e = new Exception();
+			$backtrace = $e->getTraceAsString();
+			$message .= " \n" . $backtrace;
+		}
+
+		return trigger_error($message, $error_type);
 	}
 
 		/**
@@ -95,14 +132,39 @@ abstract class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	protected function set_hooks() {
 	}
 
+	protected function path($key) {
+		return get_value($key, $this->paths, '');
+	}
+
+	protected function set_paths() {
+		$this->paths['plugin'] = WP_PLUGIN_DIR . '/' . self::PLUGIN_SLUG . '/src';
+		$this->paths['lib'] = $this->path('plugin') . '/lib';
+		$this->paths['views'] = $this->path('plugin') . '/views';
+		$this->paths['admin_views'] = $this->path('views') . '/admin';
+		$this->paths['classes'] = $this->path('lib') . '/classes';
+		$this->paths['widgets'] = $this->path('classes') . '/widgets';
+		$this->paths['vendor'] = $this->path('plugin') . '/vendor';
+	}
+
+	protected function set_urls() {
+		$this->urls['plugin'] = plugins_url() . '/' . self::PLUGIN_SLUG . '/src';
+	}
+
+	protected function url($key) {
+		return get_value($key, $this->urls, '');
+	}
+
 	/**
 	 * Constructor.
 	 */
-	public function __construct($settings_controller, WC_Aelia_Messages $messages_controller) {
-		$this->_wp_error = new WP_Error();
-		$this->_messages_controller = $messages_controller;
+	public function __construct(WC_Aelia_Settings $settings_controller, WC_Aelia_Messages $messages_controller) {
+		// Set plugin's paths
+		$this->set_paths();
+		// Set plugin's URLs
+		$this->set_urls();
 
-		$this->load_error_messages();
+		$this->messages_controller = $messages_controller;
+		$this->settings_controller = $settings_controller;
 
 		// Uncomment line below to debug the activation hook when using symlinks
 		//register_activation_hook(basename(dirname(__FILE__)).'/'.basename(__FILE__), array($this, 'setup'));
@@ -139,7 +201,7 @@ abstract class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 		$this->register_styles();
 	}
 
-/**
+	/**
 	 * Performs operation when woocommerce has been loaded.
 	 */
 	public function woocommerce_loaded() {
@@ -176,12 +238,12 @@ abstract class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	 * if the Widget Class doesn't exist or cannot be loaded.
 	 * @return bool True, if the Widget was registered correctly, False otherwise.
 	 */
-	private function register_widget($widget_class, $stop_on_error = true) {
-		$file_to_load = $this->widgets_path() . '/' . str_replace('_', '-', strtolower($widget_class)) . '.php';
+	protected function register_widget($widget_class, $stop_on_error = true) {
+		$file_to_load = $this->path('widgets') . '/' . str_replace('_', '-', strtolower($widget_class)) . '.php';
 
 		if(!file_exists($file_to_load)) {
 			if($stop_on_error === true) {
-				$this->trigger_error(AELIA_CS_ERR_FILE_NOT_FOUND, E_USER_ERROR, array($file_to_load));
+				$this->trigger_error(WC_Aelia_Messages::ERR_FILE_NOT_FOUND, E_USER_ERROR, array($file_to_load), true);
 			}
 			return false;
 		}
@@ -204,15 +266,15 @@ abstract class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	 */
 	public function register_js() {
 		// Register Admin JavaScript
-		//wp_register_script('wc-aelia-currency-switcher-widget',
-		//									 $this->plugin_url() . '/js/frontend/wc-aelia-currency-switcher-widget.js',
+		//wp_register_script('wc-aelia-template-widget',
+		//									 $this->url('plugin') . '/js/frontend/wc-aelia-template-widget.js',
 		//									 array('jquery'),
 		//									 null,
 		//									 false);
 
 		// Register Frontend JavaScript
-		//wp_register_script('wc-aelia-currency-switcher-admin',
-		//									 $this->plugin_url() . '/js/admin/wc-aelia-currency-switcher-admin.js',
+		//wp_register_script('wc-aelia-template-admin',
+		//									 $this->url('plugin') . '/js/admin/wc-aelia-template-admin.js',
 		//									 array('jquery'),
 		//									 null,
 		//									 true);
@@ -224,14 +286,14 @@ abstract class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	public function register_styles() {
 		// Register Admin stylesheet
 		//wp_register_style('wc-aelia-cs-admin',
-		//									$this->plugin_url() . '/design/css/admin.css',
+		//									$this->url('plugin') . '/design/css/admin.css',
 		//									array(),
 		//									null,
 		//									'all');
 
 		// Register Frontend stylesheet
 		//wp_register_style('wc-aelia-cs-frontend',
-		//									$this->plugin_url() . '/design/css/frontend.css',
+		//									$this->url('plugin') . '/design/css/frontend.css',
 		//									array(),
 		//									null,
 		//									'all');
@@ -289,6 +351,8 @@ abstract class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	 */
 	protected function check_requirements(&$errors) {
 		$errors = array();
+
+		// TODO Move this requirement check before the plugin is loaded, so that it can trigger a proper error messages instead of a fatal error when PHP version is too old
 		if(PHP_VERSION < '5.3') {
 			$errors[] = __('Missing requirement: this plugin requires PHP 5.3 or greater.', AELIA_CS_PLUGIN_TEXTDOMAIN);
 		}

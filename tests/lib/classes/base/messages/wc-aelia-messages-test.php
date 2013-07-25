@@ -1,11 +1,28 @@
-<?php if(!defined('ABSPATH')) exit; // Exit if accessed directly
+<?php
+
+require_once 'plugin-template.php';
+
+class WC_Aelia_Messages extends WP_UnitTestCase {
+	public function setUp() {
+		parent::setUp();
+		$this->aelia_messages = new WC_Aelia_Messages();
+	}
+
+	function testAddErrorMessage() {
+		$code = 'test_msg';
+		$message = 'Test Message';
+
+		$this->aelia_messages->add_error_message()
+	}
+}
+
 
 /**
  * Implements a base class to store and handle the messages returned by the
  * plugin.
  */
 class WC_Aelia_Messages {
-	const DEFAULT_TEXTDOMAIN = 'woocommerce-aelia';
+	const TEXTDOMAIN = 'woocommerce-aelia';
 
 	// Result constants
 	const RES_OK = 0;
@@ -14,23 +31,12 @@ class WC_Aelia_Messages {
 	// @var WP_Error Holds the error messages registered by the plugin
 	protected $_wp_error;
 
-	// @var string The text domain used by the class
-	protected $_text_domain = self::DEFAULT_TEXTDOMAIN;
+	public function __construct() {
 
-	public function __construct($text_domain = self::DEFAULT_TEXTDOMAIN) {
-		$this->_text_domain = $text_domain;
-		$this->load_error_messages();
 	}
 
 	/**
-	 * Loads all the error message used by the plugin.
-	 */
-	protected function load_error_messages() {
-		$this->add_error_message($this->_text_domain, __('File not found: "%s".', AELIA_CS_PLUGIN_TEXTDOMAIN));
-	}
-
-	/**
-	 * Registers an error message in the internal _wp_error object.
+	 * Registers an error message in the internal WP_Error object.
 	 *
 	 * @param mixed error_code The Error Code.
 	 * @param string error_message The Error Message.
@@ -40,7 +46,7 @@ class WC_Aelia_Messages {
 	}
 
 	/**
-	 * Retrieves an error message from the internal _wp_error object.
+	 * Retrieves an error message from the internal WP_Error object.
 	 *
 	 * @param mixed error_code The Error Code.
 	 * @return string The Error Message corresponding to the specified Code.
