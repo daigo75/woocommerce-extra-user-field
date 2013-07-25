@@ -4,6 +4,9 @@ interface IWC_Aelia_Plugin {
 }
 
 
+// Load general functions file
+require_once('general_functions.php');
+
 /**
  * Implements a base plugin class to be used to implement WooCommerce plugins.
  */
@@ -148,9 +151,6 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	 * Constructor.
 	 */
 	public function __construct(WC_Aelia_Settings $settings_controller, WC_Aelia_Messages $messages_controller) {
-		// Load general functions file
-		require_once('general_functions.php');
-
 		// Set plugin's paths
 		$this->set_paths();
 		// Set plugin's URLs
