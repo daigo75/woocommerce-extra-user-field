@@ -156,8 +156,8 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 		// Set plugin's URLs
 		$this->set_urls();
 
-		$this->messages_controller = $messages_controller;
-		$this->settings_controller = $settings_controller;
+		$this->_settings_controller = $settings_controller;
+		$this->_messages_controller = $messages_controller;
 
 		// Uncomment line below to debug the activation hook when using symlinks
 		//register_activation_hook(basename(dirname(__FILE__)).'/'.basename(__FILE__), array($this, 'setup'));
