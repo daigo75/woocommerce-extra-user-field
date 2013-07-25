@@ -6,4 +6,4 @@ Author: Your Name
 Version: 0.1
 */
 
-require_once 'src/plugin.php';
+require_once 'src/plugin-main.php';
