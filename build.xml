@@ -4,11 +4,10 @@
 	<property name="release_dir" value="${artifacts_dir}/release" />
 
 	<target name="build"
-					depends="prepare,lint,phploc,pdepend,phpmd-ci,phpcs-ci,phpcpd,phpdox,phpunit,phpcb,prepare-release"/>
-
+					depends="prepare,composer,lint,phploc,pdepend,phpmd-ci,phpcs-ci,phpcpd,phpdox,phpunit,phpcb,prepare-release"/>
 
  <target name="build-parallel"
-				 depends="prepare,lint,tools-parallel,phpunit,phpcb,prepare-release"/>
+				 depends="prepare,composer,lint,tools-parallel,phpunit,phpcb,prepare-release"/>
 
  <target name="tools-parallel" description="Run tools in parallel">
 		<parallel threadCount="2">
@@ -43,6 +42,13 @@
 		<mkdir dir="${release_dir}"/>
 	</target>
 
+	<!-- Update Composer required files -->
+	<target name="composer" depends="clean" description="Update external libraries">
+		<exec executable="php" failonerror="true">
+			<arg value='/usr/local/bin/composer/composer.phar' />
+			<arg value='install' />
+		</exec>
+	</target>
 
 	<target name="lint" description="Perform syntax check of sourcecode files">
 		<apply executable="php" failonerror="true">
