@@ -1,13 +1,12 @@
 <?php if(!defined('ABSPATH')) exit; // Exit if accessed directly
 
 interface IWC_Aelia_Plugin {
-	public function get_exchange_rates($base_currency, array $currencies);
 }
 
 /**
  * Implements a base plugin class to be used to implement WooCommerce plugins.
  */
-abstract class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
+class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	// @var string The plugin slug
 	const PLUGIN_SLUG = 'aelia-template-plugin';
 
@@ -80,16 +79,6 @@ abstract class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	 */
 	public static function messages() {
 		return self::instance()->messages_controller();
-	}
-
-	/**
-	 * Registers an error message in the internal Messages object.
-	 *
-	 * @param mixed error_code The Error Code.
-	 * @param string error_message The Error Message.
-	 */
-	protected function add_error_message($error_code, $error_message) {
-		$this->_messages_controller->add_error_message($error_code, $error_message);
 	}
 
 	/**
