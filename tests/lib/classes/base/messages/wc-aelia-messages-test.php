@@ -1,7 +1,5 @@
 <?php
 
-require_once 'plugin-template.php';
-
 class WC_Aelia_Messages_Test extends WP_UnitTestCase {
 	const MSG_CODE = 'test_msg_code';
 	const MESSAGE = 'Test Message';
