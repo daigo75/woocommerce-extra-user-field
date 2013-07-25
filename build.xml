@@ -165,9 +165,16 @@
 		</exec>
 	</target>
 
+	<!-- Run composer again without "dev" flag to remove development packages -->
+	<target name="composer-prepare-release" description="Update external libraries removing development packages">
+		<exec executable="php" failonerror="true">
+			<arg value='/usr/local/bin/composer/composer.phar' />
+			<arg value='install' />
+		</exec>
+	</target>
 
 	<!-- Prepare release files -->
-	<target name="prepare-release" depends="phpunit" description="Produce a release package">
+	<target name="prepare-release" depends="phpunit,composer-prepare-release" description="Produce a release package">
 		<tempfile property="release_temp_dir" suffix=".tmp" deleteonexit="false" />
 		<property name="plugin_dir" value="${basedir}" />
 		<property name="plugin_name" value="${ant.project.name}" />
