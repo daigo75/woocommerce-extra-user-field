@@ -9,6 +9,6 @@ class TemplatePluginTest extends WP_UnitTestCase {
     }
 
     function testPluginInitialization() {  
-        $this->assertFalse( null == $this->plugin );  
+        $this->assertFalse(null == $this->plugin);  
     }
 }

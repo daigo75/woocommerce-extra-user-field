@@ -1,0 +1,7 @@
+*.komodotools
+*.komodoproject
+vendor/nategood
+
+httpful
+
+/woocommerce-aelia-currencyswitcher/vendor/daigo75/geoip
