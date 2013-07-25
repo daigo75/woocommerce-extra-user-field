@@ -45,7 +45,7 @@
 	<!-- Update Composer required files -->
 	<target name="composer" depends="clean" description="Update external libraries">
 		<exec executable="php" failonerror="true">
-			<arg value='/usr/local/bin/composer/composer.phar' />
+			<arg value='/usr/local/bin/composer/composer' />
 			<arg value='--dev' />
 			<arg value='install' />
 		</exec>
@@ -168,7 +168,7 @@
 	<!-- Run composer again without "dev" flag to remove development packages -->
 	<target name="composer-prepare-release" description="Update external libraries removing development packages">
 		<exec executable="php" failonerror="true">
-			<arg value='/usr/local/bin/composer/composer.phar' />
+			<arg value='/usr/local/bin/composer/composer' />
 			<arg value='install' />
 		</exec>
 	</target>
