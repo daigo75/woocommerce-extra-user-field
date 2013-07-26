@@ -1,6 +1,12 @@
 <?php if(!defined('ABSPATH')) exit; // Exit if accessed directly
 
 interface IWC_Aelia_Plugin {
+	public function settings_controller();
+	public function messages_controller();
+	public static function instance();
+	public static function settings();
+	public function setup();
+	public static function cleanup();
 }
 
 
@@ -11,6 +17,9 @@ require_once('general_functions.php');
  * Implements a base plugin class to be used to implement WooCommerce plugins.
  */
 class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
+	// @var string The plugin text domain
+	const TEXT_DOMAIN = 'wc-aelia-plugin';
+
 	// @var string The plugin slug
 	const PLUGIN_SLUG = 'aelia-template-plugin';
 
@@ -212,7 +221,8 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	 * Performs operation when all plugins have been loaded.
 	 */
 	public function plugins_loaded() {
-		// ...
+		$class = get_class($this);
+		load_plugin_textdomain(self::TEXT_DOMAIN, false, dirname(plugin_basename(__FILE__)) . '/');
 	}
 
 	/**
@@ -327,7 +337,7 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 		$errors = array();
 		foreach($required_extensions as $extension) {
 			if(!extension_loaded($extension)) {
-				$errors[] = sprintf(__('Missing requirement: this plugin requires "%s" extension.', AELIA_CS_PLUGIN_TEXTDOMAIN),
+				$errors[] = sprintf(__('Missing requirement: this plugin requires "%s" extension.', self::TEXT_DOMAIN),
 														$extension);
 			}
 		}
@@ -347,7 +357,7 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 
 		// TODO Move this requirement check before the plugin is loaded, so that it can trigger a proper error messages instead of a fatal error when PHP version is too old
 		if(PHP_VERSION < '5.3') {
-			$errors[] = __('Missing requirement: this plugin requires PHP 5.3 or greater.', AELIA_CS_PLUGIN_TEXTDOMAIN);
+			$errors[] = __('Missing requirement: this plugin requires PHP 5.3 or greater.', self::TEXT_DOMAIN);
 		}
 
 		// Check that all required extensions are loaded
