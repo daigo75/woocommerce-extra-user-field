@@ -13,15 +13,7 @@
 /**
  * Localisation
  **/
-class Template_Plugin extends WC_Aelia_Plugin {
-	/**
-	 * Setup our filters
-	 *
-	 * @return void
-	 */
-	public function __construct() {
-	}
-
-}
+//class Template_Plugin extends WC_Aelia_Plugin {
+//}
 
 //$GLOBALS['template_plugin'] = new Template_Plugin();
