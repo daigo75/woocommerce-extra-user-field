@@ -3,7 +3,7 @@
 /**
  * Tests for the base settings controller.
  */
-class WC_Aelia_Settings_Test {
+class WC_Aelia_Settings_Test extends WP_UnitTestCase {
 	const SETTINGS_KEY = 'test_settings';
 	const TEXT_DOMAIN = 'test_domain';
 
