@@ -31,7 +31,7 @@ class WC_Aelia_Settings_Test extends WP_UnitTestCase {
 	}
 
 	public function test_default_settings() {
-		$this->assertTrue($this->settings->default_settings() === null);
+		$this->assertTrue(is_array($this->settings->default_settings()));
 	}
 
 	public function test_save() {
