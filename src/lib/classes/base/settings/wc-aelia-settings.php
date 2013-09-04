@@ -47,8 +47,8 @@ class WC_Aelia_Settings {
 	 * @return array|mixed The default settings, or the value of the specified
 	 * setting.
 	 */
-	public function default_settings($key = null, $default = null) {
-		return null;
+	public function default_settings($key = null, $default = array()) {
+		return $default;
 	}
 
 	/**
