@@ -6,11 +6,16 @@ require_once('plugin-template.php');
  * Tests for the base plugin class.
  */
 class WC_Aelia_Plugin_Test extends WP_UnitTestCase {
+	const SETTINGS_KEY = 'test_settings';
+	const TEXT_DOMAIN = 'test_domain';
 
 	public function setUp() {
 		parent::setUp();
 
-		$this->settings = new WC_Aelia_Settings();
+		$renderer = new WC_Aelia_Settings_Renderer();
+		$this->settings = new WC_Aelia_Settings(self::SETTINGS_KEY,
+																						self::TEXT_DOMAIN,
+																						$renderer);
 		$this->messages = new WC_Aelia_Messages();
 
 		$this->plugin = new WC_Aelia_Plugin($this->settings, $this->messages);
