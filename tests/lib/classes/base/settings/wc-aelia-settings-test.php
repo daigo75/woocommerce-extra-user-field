@@ -36,11 +36,11 @@ class WC_Aelia_Settings_Test extends WP_UnitTestCase {
 
 	public function test_save() {
 		$this->settings->save($this->get_test_settings());
-		$this->assertEquals($this->test_settings(), $this->settings->load());
+		$this->assertEquals($this->get_test_settings(), $this->settings->load());
 	}
 
 	public function test_load() {
-		$this->assertEquals($this->test_settings(), $this->settings->load());
+		$this->assertEquals($this->get_test_settings(), $this->settings->load());
 	}
 
 	public function test_current_settings() {
