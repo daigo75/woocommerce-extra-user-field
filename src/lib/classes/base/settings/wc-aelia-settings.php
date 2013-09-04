@@ -6,9 +6,9 @@
  */
 class WC_Aelia_Settings {
 	// @var string The text domain to be used for localisation.
-	protected $_textdomain = '';
+	public $textdomain = '';
 	// @var string The key to identify plugin settings amongst WP options.
-	protected $_settings_key;
+	public $settings_key;
 	// @var string The renderer used to render the settings page.
 	protected $_renderer;
 
@@ -29,8 +29,8 @@ class WC_Aelia_Settings {
 	 * @return WC_Aelia_Settings.
 	 */
 	public function __construct($settings_key, $textdomain = '', WC_Aelia_Settings_Renderer $renderer) {
-		$this->_settings_key = $settings_key;
-		$this->_textdomain = $textdomain;
+		$this->settings_key = $settings_key;
+		$this->textdomain = $textdomain;
 		$this->_renderer = $renderer;
 	}
 
@@ -78,7 +78,7 @@ class WC_Aelia_Settings {
 	 * @return array An array containing the plugin settings.
 	 */
 	public function load() {
-		return get_option($this->_settings_key);
+		return get_option($this->settings_key);
 	}
 
 	/**
@@ -93,7 +93,7 @@ class WC_Aelia_Settings {
 
 		$settings = array_merge($current_settings, $settings);
 
-		update_option($this->_settings_key, $settings);
+		update_option($this->settings_key, $settings);
 		// Invalidate cached settings, so that they will be loaded again when requested
 		unset($this->_current_settings);
 	}
@@ -102,7 +102,7 @@ class WC_Aelia_Settings {
 	 * Deletes plugin settings from WP database.
 	 */
 	public function delete() {
-		delete_option($this->_settings_key);
+		delete_option($this->settings_key);
 	}
 
 	/**
@@ -113,7 +113,7 @@ class WC_Aelia_Settings {
 		$this->_renderer->init_settings_page();
 
 	  // Register settings.
-		register_setting($this->_settings_key, $this->_settings_key, array($this, 'validate_settings'));
+		register_setting($this->settings_key, $this->settings_key, array($this, 'validate_settings'));
 	}
 
 	/**
@@ -140,7 +140,7 @@ class WC_Aelia_Settings {
 	 */
 	protected function add_multiple_settings_errors(array $errors) {
 		foreach($errors as $code => $message) {
-			add_settings_error($this->_settings_key, $code, $message);
+			add_settings_error($this->settings_key, $code, $message);
 		}
 	}
 }
