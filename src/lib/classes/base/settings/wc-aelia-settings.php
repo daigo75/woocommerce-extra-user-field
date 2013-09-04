@@ -32,6 +32,8 @@ class WC_Aelia_Settings {
 		$this->settings_key = $settings_key;
 		$this->textdomain = $textdomain;
 		$this->_renderer = $renderer;
+
+		add_action('admin_init', array($this, 'init_settings'));
 	}
 
 	/**
