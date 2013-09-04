@@ -10,4 +10,5 @@ return array(
     'WC_Aelia_Messages' => $baseDir . '/src/lib/classes/base/messages/wc-aelia-messages.php',
     'WC_Aelia_Plugin' => $baseDir . '/src/lib/classes/base/plugin/wc-aelia-plugin.php',
     'WC_Aelia_Settings' => $baseDir . '/src/lib/classes/base/settings/wc-aelia-settings.php',
+    'WC_Aelia_Settings_Renderer' => $baseDir . '/src/lib/classes/base/settings/wc-aelia-settings-renderer.php',
 );

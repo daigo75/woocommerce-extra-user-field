@@ -2,6 +2,9 @@
 
 require_once('plugin-template.php');
 
+/**
+ * Tests for the base plugin class.
+ */
 class WC_Aelia_Plugin_Test extends WP_UnitTestCase {
 
 	public function setUp() {
