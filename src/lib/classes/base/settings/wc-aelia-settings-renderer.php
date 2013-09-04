@@ -58,14 +58,9 @@ class WC_Aelia_Settings_Renderer {
 	/**
 	 * Class constructor.
 	 *
-	 * @param string settings_key The key used to store and retrieve the plugin settings.
-	 * @param string textdomain The text domain used for localisation.
 	 * @return WC_Aelia_Settings.
 	 */
-	public function __construct(WC_Aelia_Settings $settings_controller, $settings_key, $textdomain = '', $default_tab = self::DEFAULT_SETTINGS_TAB_ID) {
-		$this->_settings_controller = $settings_controller;
-		$this->_settings_key = $settings_key;
-		$this->_textdomain = $textdomain;
+	public function __construct($default_tab = self::DEFAULT_SETTINGS_TAB_ID) {
 		$this->_default_tab = $default_tab;
 
 		add_action('admin_menu', array($this, 'add_settings_page'));
@@ -439,7 +434,16 @@ class WC_Aelia_Settings_Renderer {
 		echo $this->get_input_html('checkbox', $field_id, $value, $attributes, $field_name);
 	}
 
-	public function init_settings_page() {
+	/**
+	 * Initialises the settings page.
+	 *
+	 * @param WC_Aelia_Settings settings_controller The settings controller.
+	 */
+	public function init_settings_page(WC_Aelia_Settings $settings_controller) {
+		$this->_settings_controller = $settings_controller;
+		$this->_settings_key = $this->_settings_controller->settings_key;
+		$this->_textdomain = $this->_settings_controller->textdomain;
+
 		$this->add_settings_tabs();
 		$this->add_settings_sections();
 		$this->add_settings_fields();
