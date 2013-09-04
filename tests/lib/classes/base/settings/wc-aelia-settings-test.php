@@ -48,4 +48,9 @@ class WC_Aelia_Settings_Test {
 		$current_settings = $this->settings->current_settings('string_param');
 		$this->assertEqual($current_settings, $test_settings);
 	}
+
+	public function test_validate_settings() {
+		$test_settings = $this->get_test_settings();
+		$this->assertEqual($this->settings->validate_settings($test_settings), $test_settings);
+	}
 }
