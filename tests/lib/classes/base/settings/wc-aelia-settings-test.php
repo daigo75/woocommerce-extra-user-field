@@ -53,4 +53,9 @@ class WC_Aelia_Settings_Test {
 		$test_settings = $this->get_test_settings();
 		$this->assertEqual($this->settings->validate_settings($test_settings), $test_settings);
 	}
+
+	public function test_delete() {
+		$this->settings->delete();
+		$this->assertTrue($this->settings->load() === false);
+	}
 }
