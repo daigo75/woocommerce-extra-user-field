@@ -1,4 +1,4 @@
-<?php if(!defined('ABSPATH')) exit; // Exit if accessed directly
+<?php
 
 /**
  * Tests for the base settings controller.
