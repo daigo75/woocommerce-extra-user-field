@@ -199,13 +199,12 @@ class WC_Aelia_Settings_Renderer {
 				}
 
 				$section_id = get_value('id', $section);
-				if(get_value($section_id, $wp_settings_fields[$page], false) === false) {
-					continue;
+				if(get_value($section_id, $wp_settings_fields[$page], false) == true) {
+					echo '<table class="form-table">';
+					do_settings_fields($page, $section['id']);
+					echo '</table>';
 				}
 
-				echo '<table class="form-table">';
-				do_settings_fields($page, $section['id']);
-				echo '</table>';
 				echo '</div>';
 			}
 			echo '</div>';
