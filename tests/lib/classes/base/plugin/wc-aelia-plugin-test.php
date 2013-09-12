@@ -12,10 +12,10 @@ class WC_Aelia_Plugin_Test extends WP_UnitTestCase {
 	public function setUp() {
 		parent::setUp();
 
-		$renderer = new WC_Aelia_Settings_Renderer();
+		$settings_page_renderer = new WC_Aelia_Settings_Renderer();
 		$this->settings = new WC_Aelia_Settings(self::SETTINGS_KEY,
 																						self::TEXT_DOMAIN,
-																						$renderer);
+																						$settings_page_renderer);
 		$this->messages = new WC_Aelia_Messages();
 
 		$this->plugin = new WC_Aelia_Plugin($this->settings, $this->messages);
@@ -107,5 +107,12 @@ class WC_Aelia_Plugin_Test extends WP_UnitTestCase {
 
 	public function test_is_woocommerce_active() {
 		$this->assertTrue(is_bool(WC_Aelia_Plugin::is_woocommerce_active()));
+	}
+
+	/**
+	 * @expectedException Aelia_NotImplementedException
+	 */
+	public function test_factory() {
+
 	}
 }
