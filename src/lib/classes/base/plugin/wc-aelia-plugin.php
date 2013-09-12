@@ -388,4 +388,27 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 			return;
 		}
 	}
+
+	/**
+	 * Checks if WooCommerce plugin is active, either for the single site or, in
+	 * case of WPMU, for the whole network.
+	 *
+	 * @return bool
+	 */
+	public static function is_woocommerce_active() {
+		if(defined('WOOCOMMERCE_ACTIVE')) {
+			return WOOCOMMERCE_ACTIVE;
+		}
+
+		$woocommerce_plugin_key = 'woocommerce/woocommerce.php';
+		$result = in_array($woocommerce_plugin_key, get_option('active_plugins'));
+
+		if(!$result && function_exists('is_multisite') && is_multisite()) {
+			$result = array_key_exists($woocommerce_plugin_key, get_site_option('active_sitewide_plugins'));
+		}
+
+		define('WOOCOMMERCE_ACTIVE', $result);
+
+		return WOOCOMMERCE_ACTIVE;
+	}
 }

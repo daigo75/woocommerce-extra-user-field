@@ -104,4 +104,8 @@ class WC_Aelia_Plugin_Test extends WP_UnitTestCase {
 		$this->plugin->cleanup();
 		$this->assertTrue(true);
 	}
+
+	public function test_is_woocommerce_active() {
+		$this->assertTrue(is_bool(WC_Aelia_Plugin::is_woocommerce_active()));
+	}
 }
