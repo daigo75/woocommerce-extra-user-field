@@ -11,6 +11,7 @@ class WC_Aelia_Messages {
 	// Result constants
 	const RES_OK = 0;
 	const ERR_FILE_NOT_FOUND = 100;
+	const ERR_NOT_IMPLEMENTED = 101;
 
 	// @var WP_Error Holds the error messages registered by the plugin
 	protected $_wp_error;
@@ -25,10 +26,15 @@ class WC_Aelia_Messages {
 	}
 
 	/**
-	 * Loads all the error message used by the plugin.
+	 * Loads all the error message used by the plugin. This class should be
+	 * extended during implementation, to add all error messages used by
+	 * the plugin.
 	 */
 	public function load_error_messages() {
 		$this->add_error_message(self::ERR_FILE_NOT_FOUND, __('File not found: "%s".', $this->_text_domain));
+		$this->add_error_message(self::ERR_NOT_IMPLEMENTED, __('Not implemented.', $this->_text_domain));
+
+		// TODO Add here all the error messages used by the plugin
 	}
 
 	/**
