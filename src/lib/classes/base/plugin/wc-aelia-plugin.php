@@ -210,8 +210,7 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	 * @throws Aelia_NotImplementedException
 	 */
 	public static function factory() {
-		$error_message = $this->get_error_message(WC_Aelia_Messages::ERR_NOT_IMPLEMENTED);
-		throw new Aelia_NotImplementedException($error_message);
+		throw new Aelia_NotImplementedException();
 	}
 
 	/**
