@@ -113,6 +113,6 @@ class WC_Aelia_Plugin_Test extends WP_UnitTestCase {
 	 * @expectedException Aelia_NotImplementedException
 	 */
 	public function test_factory() {
-
+		WC_Aelia_Plugin::factory();
 	}
 }
