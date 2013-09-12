@@ -193,13 +193,14 @@
 		<property name="compress_includes" value="**" />
 		<property name="compress_excludes" value="${compress_source_dir}/database/**" />
 
-		<!-- Debug -->
+		<!-- Debug
 		<echo message="Release dir: ${release_dir}" />
 		<echo message="Destination file: ${release_dir}/${compress_destination_file}.zip" />
 		<echo message="Source dir to compress: ${compress_source_dir}" />
 		<echo message="Compressed destination file: ${compress_destination_file}" />
 		<echo message="Includes: ${compress_includes}" />
 		<echo message="Excludes: ${compress_excludes}" />
+		-->
 
 		<zip basedir="${compress_source_dir}"
 				 destfile="${release_dir}/${compress_destination_file}.zip"
