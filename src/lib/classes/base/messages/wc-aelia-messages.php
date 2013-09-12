@@ -2,7 +2,8 @@
 
 /**
  * Implements a base class to store and handle the messages returned by the
- * plugin.
+ * plugin. This class is used to extend the basic functionalities provided by
+ * standard WP_Error class.
  */
 class WC_Aelia_Messages {
 	const DEFAULT_TEXTDOMAIN = 'woocommerce-aelia';
