@@ -158,8 +158,15 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 
 	/**
 	 * Constructor.
+	 *
+	 * @param WC_Aelia_Settings settings_controller The controller that will handle
+	 * the plugin settings.
+	 * @param WC_Aelia_Messages messages_controller The controller that will handle
+	 * the messages produced by the plugin.
+	 * @return WC_Aelia_Plugin
 	 */
-	public function __construct(WC_Aelia_Settings $settings_controller, WC_Aelia_Messages $messages_controller) {
+	public function __construct(WC_Aelia_Settings $settings_controller,
+															WC_Aelia_Messages $messages_controller) {
 		// Set plugin's paths
 		$this->set_paths();
 		// Set plugin's URLs
@@ -192,6 +199,19 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 		if(is_ssl()) {
 			// ...
 		}
+	}
+
+	/**
+	 * Returns an instance of the class. This method should be implemented by
+	 * descendant classes to return a pre-configured instance of the plugin class,
+	 * complete with the appropriate settings controller.
+	 *
+	 * @return WC_Aelia_Plugin
+	 * @throws Aelia_NotImplementedException
+	 */
+	public static function factory() {
+		$error_message = $this->get_error_message(WC_Aelia_Messages::ERR_NOT_IMPLEMENTED);
+		throw new Aelia_NotImplementedException($error_message);
 	}
 
 	/**
