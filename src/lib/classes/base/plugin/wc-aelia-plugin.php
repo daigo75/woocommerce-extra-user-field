@@ -352,7 +352,7 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	 * generated.
 	 * @return bool
 	 */
-	protected function check_requirements(&$errors) {
+	protected function check_requirements(&$errors = array()) {
 		$errors = array();
 
 		// TODO Move this requirement check before the plugin is loaded, so that it can trigger a proper error messages instead of a fatal error when PHP version is too old
@@ -367,7 +367,7 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 
 		$errors = array_merge($errors, $extension_errors);
 
-		return empty($errors);
+		return $errors;
 	}
 
 	/**
@@ -375,7 +375,8 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	 */
 	public function setup() {
 		$errors = array();
-		if(!$this->check_requirements($errors)) {
+		$this->check_requirements($errors);
+		if(!empty($errors)) {
 			die(implode('<br>', $errors));
 		}
 	}
