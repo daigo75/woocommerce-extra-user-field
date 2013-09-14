@@ -289,14 +289,14 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	public function register_js() {
 		// Register Admin JavaScript
 		//wp_register_script('wc-aelia-template-widget',
-		//									 $this->url('plugin') . '/js/frontend/wc-aelia-template-widget.js',
+		//									 $this->url('plugin') . '/src/js/frontend/wc-aelia-template-widget.js',
 		//									 array('jquery'),
 		//									 null,
 		//									 false);
 
 		// Register Frontend JavaScript
 		//wp_register_script('wc-aelia-template-admin',
-		//									 $this->url('plugin') . '/js/admin/wc-aelia-template-admin.js',
+		//									 $this->url('plugin') . '/src/js/admin/wc-aelia-template-admin.js',
 		//									 array('jquery'),
 		//									 null,
 		//									 true);
@@ -308,14 +308,14 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	public function register_styles() {
 		// Register Admin stylesheet
 		wp_register_style(self::PLUGIN_SLUG . '-admin',
-											$this->url('plugin') . '/design/css/admin.css',
+											$this->url('plugin') . '/src/design/css/admin.css',
 											array(),
 											null,
 											'all');
 
 		// Register Frontend stylesheet
 		wp_register_style(self::PLUGIN_SLUG . '-frontend',
-											$this->url('plugin') . '/design/css/frontend.css',
+											$this->url('plugin') . '/src/design/css/frontend.css',
 											array(),
 											null,
 											'all');
