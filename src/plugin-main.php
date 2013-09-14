@@ -3,6 +3,9 @@
 //define('SCRIPT_DEBUG', 1);
 //error_reporting(E_ALL);
 
+// Load Composer autoloader
+require_once(__DIR__ . '/vendor/autoload.php');
+
 /**
  * Check if WooCommerce is active
  */
@@ -13,7 +16,7 @@
 /**
  * Localisation
  **/
-//class Template_Plugin extends WC_Aelia_Plugin {
-//}
+class Template_Plugin extends WC_Aelia_Plugin {
+}
 
-//$GLOBALS['template_plugin'] = new Template_Plugin();
+$GLOBALS['template_plugin'] = new Template_Plugin();

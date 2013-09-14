@@ -3,6 +3,6 @@
 		"mockery/mockery": "*"
   },
 	"autoload" : {
-		"classmap": ["src/lib/classes/"]
+		"classmap": ["lib/classes/"]
 	}
 }

@@ -21,7 +21,7 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	const TEXT_DOMAIN = 'wc-aelia-plugin';
 
 	// @var string The plugin slug
-	const PLUGIN_SLUG = 'aelia-template-plugin';
+	const PLUGIN_SLUG = 'wc-aelia-template-plugin';
 
 	// @var WC_Aelia_Settings The object that will handle plugin's settings.
 	protected $_settings_controller;
@@ -202,6 +202,23 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	}
 
 	/**
+	 * Run the updates required by the plugin. This method runs at every load, but
+	 * the updates are executed only once. This allows the plugin to run the
+	 * updates automatically, without requiring deactivation and rectivation.
+	 *
+	 * @return bool
+	 */
+	protected function run_updates() {
+		$installer_class = get_class($this) . '_Install';
+		if(!class_exists($installer_class)) {
+			return;
+		}
+
+		$installer = new $installer_class();
+		return $installer->update(self::INSTANCE_KEY, self::VERSION);
+	}
+
+	/**
 	 * Returns an instance of the class. This method should be implemented by
 	 * descendant classes to return a pre-configured instance of the plugin class,
 	 * complete with the appropriate settings controller.
@@ -289,14 +306,14 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	public function register_js() {
 		// Register Admin JavaScript
 		//wp_register_script('wc-aelia-template-widget',
-		//									 $this->url('plugin') . '/src/js/frontend/wc-aelia-template-widget.js',
+		//									 $this->url('plugin') . '/js/frontend/wc-aelia-template-widget.js',
 		//									 array('jquery'),
 		//									 null,
 		//									 false);
 
 		// Register Frontend JavaScript
 		//wp_register_script('wc-aelia-template-admin',
-		//									 $this->url('plugin') . '/src/js/admin/wc-aelia-template-admin.js',
+		//									 $this->url('plugin') . '/js/admin/wc-aelia-template-admin.js',
 		//									 array('jquery'),
 		//									 null,
 		//									 true);
@@ -308,14 +325,14 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	public function register_styles() {
 		// Register Admin stylesheet
 		wp_register_style(self::PLUGIN_SLUG . '-admin',
-											$this->url('plugin') . '/src/design/css/admin.css',
+											$this->url('plugin') . '/design/css/admin.css',
 											array(),
 											null,
 											'all');
 
 		// Register Frontend stylesheet
 		wp_register_style(self::PLUGIN_SLUG . '-frontend',
-											$this->url('plugin') . '/src/design/css/frontend.css',
+											$this->url('plugin') . '/design/css/frontend.css',
 											array(),
 											null,
 											'all');
