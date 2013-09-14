@@ -2,3 +2,5 @@
 *.komodoproject
 vendor/
 src/vendor/
+
+/src/composer.lock

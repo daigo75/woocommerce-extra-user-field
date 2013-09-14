@@ -134,10 +134,19 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	protected function set_hooks() {
 	}
 
-	protected function path($key) {
+	/**
+	 * Returns the full path corresponding to the specified key.
+	 *
+	 * @param key The path key.
+	 * @return string
+	 */
+	public function path($key) {
 		return get_value($key, $this->paths, '');
 	}
 
+	/**
+	 * Builds and stores the paths used by the plugin.
+	 */
 	protected function set_paths() {
 		$this->paths['plugin'] = WP_PLUGIN_DIR . '/' . self::PLUGIN_SLUG . '/src';
 		$this->paths['lib'] = $this->path('plugin') . '/lib';
@@ -148,11 +157,20 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 		$this->paths['vendor'] = $this->path('plugin') . '/vendor';
 	}
 
+	/**
+	 * Builds and stores the URLs used by the plugin.
+	 */
 	protected function set_urls() {
 		$this->urls['plugin'] = plugins_url() . '/' . self::PLUGIN_SLUG . '/src';
 	}
 
-	protected function url($key) {
+	/**
+	 * Returns the URL corresponding to the specified key.
+	 *
+	 * @param key The URL key.
+	 * @return string
+	 */
+	public function url($key) {
 		return get_value($key, $this->urls, '');
 	}
 
