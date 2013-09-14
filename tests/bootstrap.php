@@ -11,7 +11,7 @@ if(file_exists($path)) {
 }
 
 // Load Composer Autoloader
-$composer_autoloader = realpath(__DIR__ . '/../vendor/autoload.php');
+$composer_autoloader = realpath(__DIR__ . '/../src/vendor/autoload.php');
 if(file_exists($composer_autoloader)) {
   require_once $composer_autoloader;
 } else {
