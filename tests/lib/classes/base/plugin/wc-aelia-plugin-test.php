@@ -81,22 +81,24 @@ class WC_Aelia_Plugin_Test extends WP_UnitTestCase {
 	public function test_register_styles() {
 		$this->plugin->register_styles();
 
-		$admin_styles_registered = wp_script_is(WC_Aelia_Plugin::PLUGIN_SLUG . '-admin'. 'registered');
-		$frontend_styles_registered = wp_script_is(WC_Aelia_Plugin::PLUGIN_SLUG . '-frontend'. 'registered');
-		$this->assertTrue($admin_styles_registered && $frontend_styles_registered);
+		$admin_styles_registered = wp_style_is(WC_Aelia_Plugin::PLUGIN_SLUG . '-admin', 'registered');
+		$this->assertTrue($admin_styles_registered);
+
+		$frontend_styles_registered = wp_style_is(WC_Aelia_Plugin::PLUGIN_SLUG . '-frontend', 'registered');
+		$this->assertTrue($frontend_styles_registered);
 	}
 
 	public function test_load_admin_scripts() {
 		$this->plugin->load_admin_scripts();
 
-		$admin_styles_enqueued = wp_script_is(WC_Aelia_Plugin::PLUGIN_SLUG . '-admin'. 'enqueued');
+		$admin_styles_enqueued = wp_style_is(WC_Aelia_Plugin::PLUGIN_SLUG . '-admin', 'enqueued');
 		$this->assertTrue($admin_styles_enqueued);
 	}
 
 	public function test_load_frontend_scripts() {
 		$this->plugin->load_frontend_scripts();
 
-		$frontend_styles_enqueued = wp_script_is(WC_Aelia_Plugin::PLUGIN_SLUG . '-frontend'. 'enqueued');
+		$frontend_styles_enqueued = wp_style_is(WC_Aelia_Plugin::PLUGIN_SLUG . '-frontend', 'enqueued');
 		$this->assertTrue($frontend_styles_enqueued);
 	}
 
