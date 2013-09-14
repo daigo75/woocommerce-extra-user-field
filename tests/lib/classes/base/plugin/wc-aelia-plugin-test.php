@@ -116,6 +116,16 @@ class WC_Aelia_Plugin_Test extends WP_UnitTestCase {
 		$this->assertTrue(is_bool(WC_Aelia_Plugin::is_woocommerce_active()));
 	}
 
+	public function test_path() {
+		$plugin_path = $this->plugin->path('plugin');
+		$this->assertTrue(is_string($plugin_path) && !empty($plugin_path));
+	}
+
+	public function test_url() {
+		$plugin_url = $this->plugin->url('plugin');
+		$this->assertTrue(is_string($plugin_url) && !empty($plugin_url));
+	}
+
 	/**
 	 * @expectedException Aelia_NotImplementedException
 	 */
