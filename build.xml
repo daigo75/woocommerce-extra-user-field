@@ -44,7 +44,7 @@
 
 	<!-- Update Composer required files -->
 	<target name="composer" depends="clean" description="Update external libraries">
-		<exec executable="php" failonerror="true">
+		<exec executable="php" dir="${basedir}/src" failonerror="true">
 			<arg value='/usr/local/bin/composer' />
 			<arg value='--dev' />
 			<arg value='install' />
