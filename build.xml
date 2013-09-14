@@ -167,7 +167,7 @@
 
 	<!-- Run composer again without "dev" flag to remove development packages -->
 	<target name="composer-prepare-release" description="Update external libraries removing development packages">
-		<exec executable="php" failonerror="true">
+		<exec executable="php" dir="${basedir}/src" failonerror="true">
 			<arg value='/usr/local/bin/composer' />
 			<arg value='install' />
 		</exec>
