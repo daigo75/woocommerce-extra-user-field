@@ -307,18 +307,18 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	 */
 	public function register_styles() {
 		// Register Admin stylesheet
-		//wp_register_style('wc-aelia-cs-admin',
-		//									$this->url('plugin') . '/design/css/admin.css',
-		//									array(),
-		//									null,
-		//									'all');
+		wp_register_style(self::PLUGIN_SLUG . '-admin',
+											$this->url('plugin') . '/design/css/admin.css',
+											array(),
+											null,
+											'all');
 
 		// Register Frontend stylesheet
-		//wp_register_style('wc-aelia-cs-frontend',
-		//									$this->url('plugin') . '/design/css/frontend.css',
-		//									array(),
-		//									null,
-		//									'all');
+		wp_register_style(self::PLUGIN_SLUG . '-frontend',
+											$this->url('plugin') . '/design/css/frontend.css',
+											array(),
+											null,
+											'all');
 	}
 
 	/**
@@ -327,14 +327,10 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	public function load_admin_scripts() {
 		// Styles
 		// Enqueue the required Admin stylesheets
-		//wp_enqueue_style('wc-aelia-plugin-admin');
+		wp_enqueue_style(self::PLUGIN_SLUG . '-admin');
 
 		// JavaScript
-		// Placeholder - Enable and pass the values to localise the Admin page script
-		//wp_localize_script('wc-aelia-currency-switcher-admin',
-		//									 'aelia-cs-admin',
-		//									 array());
-		//wp_enqueue_script('wc-aelia-currency-switcher-admin');
+		// TODO Enqueue scripts for Admin section
 	}
 
 	/**
@@ -342,7 +338,10 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	 */
 	public function load_frontend_scripts() {
 		// Enqueue the required Frontend stylesheets
-		//wp_enqueue_style('wc-aelia-plugin-frontend');
+		wp_enqueue_style(self::PLUGIN_SLUG . '-frontend');
+
+		// JavaScript
+		// TODO Enqueue scripts for frontend
 	}
 
 	/**
