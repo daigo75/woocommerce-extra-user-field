@@ -155,6 +155,10 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 		$this->paths['classes'] = $this->path('lib') . '/classes';
 		$this->paths['widgets'] = $this->path('classes') . '/widgets';
 		$this->paths['vendor'] = $this->path('plugin') . '/vendor';
+
+		$this->paths['design'] = $this->path('plugin') . '/design';
+		$this->paths['css'] = $this->path('design') . '/css';
+		$this->paths['images'] = $this->path('design') . '/images';
 	}
 
 	/**
