@@ -1,3 +1,4 @@
 *.komodotools
 *.komodoproject
-vendor/*
+vendor/
+src/vendor/
