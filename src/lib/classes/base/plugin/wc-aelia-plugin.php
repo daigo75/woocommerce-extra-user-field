@@ -155,7 +155,7 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	 * Builds and stores the paths used by the plugin.
 	 */
 	protected function set_paths() {
-		$this->paths['plugin'] = WP_PLUGIN_DIR . '/' .  . '/src';
+		$this->paths['plugin'] = WP_PLUGIN_DIR . '/' . static::$plugin_slug  . '/src';
 		$this->paths['lib'] = $this->path('plugin') . '/lib';
 		$this->paths['views'] = $this->path('plugin') . '/views';
 		$this->paths['admin_views'] = $this->path('views') . '/admin';
@@ -172,7 +172,7 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	 * Builds and stores the URLs used by the plugin.
 	 */
 	protected function set_urls() {
-		$this->urls['plugin'] = plugins_url() . '/' .  . '/src';
+		$this->urls['plugin'] = plugins_url() . '/' . static::$plugin_slug . '/src';
 	}
 
 	/**
