@@ -112,7 +112,7 @@ class WC_Aelia_Settings {
 	 */
 	public function init_settings() {
 		// Prepare settings page for rendering
-		$this->_renderer->init_settings_page();
+		$this->_renderer->init_settings_page($this);
 
 	  // Register settings.
 		register_setting($this->settings_key, $this->settings_key, array($this, 'validate_settings'));

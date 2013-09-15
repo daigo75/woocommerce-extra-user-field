@@ -145,6 +145,13 @@ class WC_Aelia_Settings_Renderer {
 	}
 
 	/**
+	 * Configures the plugin settings fields.
+	 */
+	protected function add_settings_fields() {
+		// To be implemented by descendant class
+	}
+
+	/**
 	 * Renders all settings sections added to a particular settings page. This
 	 * method is an almost exact clone of global do_settings_sections(), the main
 	 * difference is that each section is wrapped in its own <div>.

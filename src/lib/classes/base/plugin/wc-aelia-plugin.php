@@ -73,6 +73,7 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	 * @return WC_Aelia_Plugin.
 	 */
 	public static function instance() {
+		// TODO Use get_called_class instead
 		return $GLOBALS[self::INSTANCE_KEY];
 	}
 
