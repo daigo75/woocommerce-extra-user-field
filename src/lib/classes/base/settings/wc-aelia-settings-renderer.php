@@ -443,6 +443,16 @@ class WC_Aelia_Settings_Renderer {
 	}
 
 	/**
+	 * Event handler, fired when setting page is loaded.
+	 */
+	public function options_page_load() {
+		if(get_value('settings-updated', $_GET)) {
+      //plugin settings have been saved. Display a message, or do anything you like.
+			//var_dump('Settings saved.');
+		}
+	}
+
+	/**
 	 * Initialises the settings page.
 	 *
 	 * @param WC_Aelia_Settings settings_controller The settings controller.
