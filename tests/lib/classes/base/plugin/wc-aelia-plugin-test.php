@@ -4,8 +4,8 @@
  * Tests for the base plugin class.
  */
 class WC_Aelia_Plugin_Test extends WP_UnitTestCase {
-	const SETTINGS_KEY = 'test_settings';
-	const TEXT_DOMAIN = 'test_domain';
+	const SETTINGS_KEY = 'wc-aelia-plugin-test';
+	const TEXT_DOMAIN = 'wc-aelia-plugin-test';
 
 	public function setUp() {
 		parent::setUp();
@@ -19,7 +19,7 @@ class WC_Aelia_Plugin_Test extends WP_UnitTestCase {
 		$this->plugin = new WC_Aelia_Plugin($this->settings, $this->messages);
 
 		$plugin_class = get_class($this->plugin);
-		$GLOBALS[$plugin_class::INSTANCE_KEY] = $this->plugin;
+		$GLOBALS[$plugin_class::$instance_key] = $this->plugin;
 	}
 
 	public function test_settings_controller() {
