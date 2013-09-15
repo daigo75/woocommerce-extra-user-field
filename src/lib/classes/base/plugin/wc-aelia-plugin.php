@@ -1,5 +1,9 @@
 <?php if(!defined('ABSPATH')) exit; // Exit if accessed directly
 
+if(class_exists('WC_Aelia_Plugin')) {
+	return;
+}
+
 interface IWC_Aelia_Plugin {
 	public function settings_controller();
 	public function messages_controller();
@@ -17,11 +21,14 @@ require_once('general_functions.php');
  * Implements a base plugin class to be used to implement WooCommerce plugins.
  */
 class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
+	// @var string The plugin version.
+	public static $version = '0.0.1';
+
 	// @var string The plugin text domain
-	const TEXT_DOMAIN = 'wc-aelia-plugin';
+	public static $text_domain = 'wc-aelia-plugin';
 
 	// @var string The plugin slug
-	const PLUGIN_SLUG = 'wc-aelia-template-plugin';
+	public static $plugin_slug = 'wc-aelia-plugin';
 
 	// @var WC_Aelia_Settings The object that will handle plugin's settings.
 	protected $_settings_controller;
@@ -29,7 +36,7 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	protected $_messages_controller;
 
 	// @var string The instance key that identifies the plugin
-	const INSTANCE_KEY = null;
+	public static $instance_key = 'wc-aelia-plugin';
 
 	protected $paths = array(
 		// This array will contain the paths used by the plugin
@@ -73,8 +80,7 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	 * @return WC_Aelia_Plugin.
 	 */
 	public static function instance() {
-		// TODO Use get_called_class instead
-		return $GLOBALS[self::INSTANCE_KEY];
+		return $GLOBALS[static::$instance_key];
 	}
 
 	/**
@@ -149,7 +155,7 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	 * Builds and stores the paths used by the plugin.
 	 */
 	protected function set_paths() {
-		$this->paths['plugin'] = WP_PLUGIN_DIR . '/' . self::PLUGIN_SLUG . '/src';
+		$this->paths['plugin'] = WP_PLUGIN_DIR . '/' .  . '/src';
 		$this->paths['lib'] = $this->path('plugin') . '/lib';
 		$this->paths['views'] = $this->path('plugin') . '/views';
 		$this->paths['admin_views'] = $this->path('views') . '/admin';
@@ -166,7 +172,7 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	 * Builds and stores the URLs used by the plugin.
 	 */
 	protected function set_urls() {
-		$this->urls['plugin'] = plugins_url() . '/' . self::PLUGIN_SLUG . '/src';
+		$this->urls['plugin'] = plugins_url() . '/' .  . '/src';
 	}
 
 	/**
@@ -186,7 +192,6 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	 * the plugin settings.
 	 * @param WC_Aelia_Messages messages_controller The controller that will handle
 	 * the messages produced by the plugin.
-	 * @return WC_Aelia_Plugin
 	 */
 	public function __construct(WC_Aelia_Settings $settings_controller,
 															WC_Aelia_Messages $messages_controller) {
@@ -238,7 +243,7 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 		}
 
 		$installer = new $installer_class();
-		return $installer->update(self::INSTANCE_KEY, self::VERSION);
+		return $installer->update(static::$instance_key, static::$version);
 	}
 
 	/**
@@ -281,7 +286,7 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	 */
 	public function plugins_loaded() {
 		$class = get_class($this);
-		load_plugin_textdomain(self::TEXT_DOMAIN, false, dirname(plugin_basename(__FILE__)) . '/');
+		load_plugin_textdomain(static::$text_domain, false, dirname(plugin_basename(__FILE__)) . '/');
 	}
 
 	/**
@@ -347,14 +352,14 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	 */
 	public function register_styles() {
 		// Register Admin stylesheet
-		wp_register_style(self::PLUGIN_SLUG . '-admin',
+		wp_register_style( . '-admin',
 											$this->url('plugin') . '/design/css/admin.css',
 											array(),
 											null,
 											'all');
 
 		// Register Frontend stylesheet
-		wp_register_style(self::PLUGIN_SLUG . '-frontend',
+		wp_register_style(static::$plugin_slug . '-frontend',
 											$this->url('plugin') . '/design/css/frontend.css',
 											array(),
 											null,
@@ -367,7 +372,7 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	public function load_admin_scripts() {
 		// Styles
 		// Enqueue the required Admin stylesheets
-		wp_enqueue_style(self::PLUGIN_SLUG . '-admin');
+		wp_enqueue_style(static::$plugin_slug . '-admin');
 
 		// JavaScript
 		// TODO Enqueue scripts for Admin section
@@ -378,7 +383,7 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	 */
 	public function load_frontend_scripts() {
 		// Enqueue the required Frontend stylesheets
-		wp_enqueue_style(self::PLUGIN_SLUG . '-frontend');
+		wp_enqueue_style(static::$plugin_slug . '-frontend');
 
 		// JavaScript
 		// TODO Enqueue scripts for frontend
@@ -395,7 +400,7 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 		$errors = array();
 		foreach($required_extensions as $extension) {
 			if(!extension_loaded($extension)) {
-				$errors[] = sprintf(__('Missing requirement: this plugin requires "%s" extension.', self::TEXT_DOMAIN),
+				$errors[] = sprintf(__('Missing requirement: this plugin requires "%s" extension.', static::$text_domain),
 														$extension);
 			}
 		}
@@ -415,7 +420,7 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 
 		// TODO Move this requirement check before the plugin is loaded, so that it can trigger a proper error messages instead of a fatal error when PHP version is too old
 		if(PHP_VERSION < '5.3') {
-			$errors[] = __('Missing requirement: this plugin requires PHP 5.3 or greater.', self::TEXT_DOMAIN);
+			$errors[] = __('Missing requirement: this plugin requires PHP 5.3 or greater.', static::$text_domain);
 		}
 
 		// Check that all required extensions are loaded
