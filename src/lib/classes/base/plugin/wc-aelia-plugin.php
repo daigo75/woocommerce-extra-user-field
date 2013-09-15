@@ -24,19 +24,19 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	// @var string The plugin version.
 	public static $version = '0.0.1';
 
-	// @var string The plugin text domain
-	public static $text_domain = 'wc-aelia-plugin';
-
-	// @var string The plugin slug
+	// @var string The plugin slug.
 	public static $plugin_slug = 'wc-aelia-plugin';
+	// @var string The plugin text domain.
+	public static $text_domain = 'wc-aelia-plugin';
+	// @var string The key used to store the plugin settings.
+	public static $settings_key = 'wc-aelia-plugin';
+	// @var string The instance key that identifies the plugin
+	public static $instance_key = 'wc-aelia-plugin';
 
 	// @var WC_Aelia_Settings The object that will handle plugin's settings.
 	protected $_settings_controller;
 	// @var WC_Aelia_Messages The object that will handle plugin's messages.
 	protected $_messages_controller;
-
-	// @var string The instance key that identifies the plugin
-	public static $instance_key = 'wc-aelia-plugin';
 
 	protected $paths = array(
 		// This array will contain the paths used by the plugin
@@ -352,7 +352,7 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	 */
 	public function register_styles() {
 		// Register Admin stylesheet
-		wp_register_style( . '-admin',
+		wp_register_style(static::$plugin_slug . '-admin',
 											$this->url('plugin') . '/design/css/admin.css',
 											array(),
 											null,

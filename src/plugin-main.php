@@ -37,8 +37,8 @@ class WC_Aelia_Template_Plugin extends WC_Aelia_Plugin {
 
 	public static function factory() {
 		$settings_page_renderer = new WC_Aelia_Settings_Renderer();
-		$settings_controller = new WC_Aelia_Settings(self::SETTINGS_KEY,
-																								 self::TEXT_DOMAIN,
+		$settings_controller = new WC_Aelia_Settings(self::$settings_key,
+																								 self::$text_domain,
 																								 $settings_page_renderer);
 		$messages_controller = new WC_Aelia_Messages();
 
