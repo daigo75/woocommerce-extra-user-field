@@ -128,13 +128,6 @@ class WC_Aelia_Settings {
 		return $settings;
 	}
 
-	public function options_page_load() {
-		if(get_value('settings-updated', $_GET)) {
-      //plugin settings have been saved. Here goes your code
-			//var_dump('Settings saved.');
-		}
-	}
-
 	/**
 	 * Given an array of Code => Message pairs, adds them to the settings errors.
 	 *
