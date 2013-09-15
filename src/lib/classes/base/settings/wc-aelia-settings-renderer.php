@@ -58,6 +58,8 @@ class WC_Aelia_Settings_Renderer {
 	/**
 	 * Class constructor.
 	 *
+	 * @param string default_tab the default tab inside which sections should be
+	 * rendered, unless a different tab is specified for them.
 	 * @return WC_Aelia_Settings.
 	 */
 	public function __construct($default_tab = self::DEFAULT_SETTINGS_TAB_ID) {
