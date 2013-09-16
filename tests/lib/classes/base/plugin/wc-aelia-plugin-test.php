@@ -134,6 +134,6 @@ class WC_Aelia_Plugin_Test extends WP_UnitTestCase {
 	}
 
 	public function test_plugin_dir() {
-		$this->assertTrue($this->plugin->plugin_dir() == 'wc-aelia-template-plugin');
+		$this->assertEquals($this->plugin->plugin_dir(), 'wc-aelia-template-plugin');
 	}
 }
