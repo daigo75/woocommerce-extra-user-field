@@ -29,7 +29,7 @@ class WC_Aelia_Template_Plugin extends WC_Aelia_Plugin {
 															WC_Aelia_Messages $messages_controller) {
 		parent::__construct($settings_controller, $messages_controller);
 
-		self::$plugin_slug = 'wc-authipay-gateway-plugin';
+		self::$plugin_slug = 'wc-aelia-template-plugin';
 		self::$text_domain = self::$plugin_slug;
 		self::$settings_key = self::$plugin_slug;
 		self::$instance_key = self::$plugin_slug;
