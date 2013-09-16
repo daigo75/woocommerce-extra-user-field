@@ -24,14 +24,17 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	// @var string The plugin version.
 	public static $version = '0.0.1';
 
-	// @var string The plugin slug.
+	// @var string The plugin slug
 	public static $plugin_slug = 'wc-aelia-plugin';
-	// @var string The plugin text domain.
+	// @var string The plugin text domain
 	public static $text_domain = 'wc-aelia-plugin';
-	// @var string The key used to store the plugin settings.
+	// @var string The key used to store the plugin settings
 	public static $settings_key = 'wc-aelia-plugin';
 	// @var string The instance key that identifies the plugin
 	public static $instance_key = 'wc-aelia-plugin';
+
+	// @var string The base name of the plugin directory
+	protected $plugin_directory;
 
 	// @var WC_Aelia_Settings The object that will handle plugin's settings.
 	protected $_settings_controller;
@@ -155,7 +158,7 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	 * Builds and stores the paths used by the plugin.
 	 */
 	protected function set_paths() {
-		$this->paths['plugin'] = WP_PLUGIN_DIR . '/' . static::$plugin_slug  . '/src';
+		$this->paths['plugin'] = WP_PLUGIN_DIR . '/' . $this->plugin_dir()  . '/src';
 		$this->paths['lib'] = $this->path('plugin') . '/lib';
 		$this->paths['views'] = $this->path('plugin') . '/views';
 		$this->paths['admin_views'] = $this->path('views') . '/admin';
@@ -172,7 +175,11 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	 * Builds and stores the URLs used by the plugin.
 	 */
 	protected function set_urls() {
-		$this->urls['plugin'] = plugins_url() . '/' . static::$plugin_slug . '/src';
+		$this->urls['plugin'] = plugins_url() . '/' . $this->plugin_dir() . '/src';
+
+		$this->urls['design'] = $this->url('plugin') . '/design';
+		$this->urls['css'] = $this->url('design') . '/css';
+		$this->urls['images'] = $this->url('design') . '/images';
 	}
 
 	/**
@@ -183,6 +190,21 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	 */
 	public function url($key) {
 		return get_value($key, $this->urls, '');
+	}
+
+	/**
+	 * Returns the directory in which the plugin is stored. Only the base name of
+	 * the directory is returned (i.e. without path).
+	 *
+	 * @return string
+	 */
+	public function plugin_dir() {
+		if(empty($this->plugin_directory)) {
+			$reflector = new ReflectionClass($this);
+			$this->plugin_directory = basename(dirname(dirname($reflector->getFileName())));
+		}
+
+		return $this->plugin_directory;
 	}
 
 	/**
