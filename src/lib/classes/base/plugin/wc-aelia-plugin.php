@@ -202,9 +202,8 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 		if(empty($this->plugin_directory)) {
 			$reflector = new ReflectionClass($this);
 			$this->plugin_directory = basename(dirname(dirname($reflector->getFileName())));
-		}
-
 		var_dump($reflector->getFileName());
+		}
 
 		return $this->plugin_directory;
 	}
