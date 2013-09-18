@@ -24,11 +24,15 @@ $required_plugins = array(
 );
 
 foreach($required_plugins as $plugin) {
+	printf("Activating plugin '%s'...\n", $plugin);
 	$result = activate_plugin($plugin);
 	if($result != null) {
+		echo "Success.\n";
+	}
+	else {
 		$errors = $result->get_error_messages();
 
-		printf('Could not activate plugin "%s". See errors below.', $plugin);
+		printf("Could not activate plugin '%s'. See errors below.\n", $plugin);
 		exit(implode("\n", $errors));
 	}
 }
