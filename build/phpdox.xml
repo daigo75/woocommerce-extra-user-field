@@ -4,6 +4,8 @@
  <project name="WordPress Plugin Template" source="src/" workdir="../build/api">
   <collector publiconly="false">
    <include mask="*.php" />
+	 <exclude mask="tests/**" />
+	 <exclude mask="src/vendor/**" />
   </collector>
 
   <generator output="build">
