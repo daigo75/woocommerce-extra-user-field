@@ -48,6 +48,7 @@
 
 		<!-- Install plugin dependencies -->
 		<echo message="Using WooCommerce plugin from ${woocommerce_plugin_dir}..." />
+		<property name="woocommerce_plugin_dir" value="${wordpress_plugins_dir}/${wc_plugin_dir}" />
 		<symlink link="${wp_unit_plugins_dir}/woocommerce"
 						 resource="${woocommerce_plugin_dir}"
 						 overwrite="true"
