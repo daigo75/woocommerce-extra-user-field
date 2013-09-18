@@ -2,6 +2,7 @@
 <project name="name-of-project" default="build">
 	<property name="artifacts_dir" value="${basedir}/build" />
 	<property name="release_dir" value="${artifacts_dir}/release" />
+	<property name="wp_unit_plugin_dir" value="${wp_unit_dir}/wordpress/wp-content/plugins/" />
 
 	<target name="build"
 					depends="prepare,composer,lint,phploc,pdepend,phpmd-ci,phpcpd,phpdox,phpunit,phpcb,prepare-release"/>
@@ -30,6 +31,10 @@
 		<delete dir="${artifacts_dir}/logs"/>
 		<delete dir="${artifacts_dir}/pdepend"/>
 		<delete dir="${release_dir}"/>
+
+		<!-- Delete plugin dependencies -->
+		<echo message="Deleting WooCommerce plugin from ${wp_unit_plugin_dir}..." />
+		<delete file="${wc_plugin_dir}/woocommerce" followsymlinks="false" removenotfollowedsymlinks="true" quite="true" />
 	</target>
 
 	<target name="prepare" depends="clean" description="Prepare for build">
@@ -40,6 +45,13 @@
 		<mkdir dir="${artifacts_dir}/pdepend"/>
 		<mkdir dir="${artifacts_dir}/phpdox"/>
 		<mkdir dir="${release_dir}"/>
+
+		<!-- Install plugin dependencies -->
+		<echo message="Using WooCommerce plugin from ${wp_plugins_dir}/${woocommerce_dir}..." />
+		<symlink link="${wc_plugin_dir}/woocommerce"
+						 resource="${wp_plugins_dir}/${woocommerce_dir}"
+						 overwrite="true"
+						 failonerror="true" />
 	</target>
 
 	<!-- Update Composer required files -->
