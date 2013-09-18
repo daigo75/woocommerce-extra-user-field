@@ -17,3 +17,18 @@ if(file_exists($composer_autoloader)) {
 } else {
    exit("Couldn't find path to composer autoloader. Expected location: '$composer_autoloader'.\n");
 }
+
+// Try to activate all required plugins
+$required_plugins = array(
+	'woocommerce/woocommerce.php',
+);
+
+foreach($required_plugins as $plugin) {
+	$result = activate_plugin($plugin);
+	if($result != null) {
+		$errors = $result->get_error_messages();
+
+		printf('Could not activate plugin "%s". See errors below.', $plugin);
+		exit(implode("\n", $errors));
+	}
+}
