@@ -32,4 +32,7 @@
 		<log type="junit" target="../build/logs/junit.xml" logIncompleteSkipped="false"/>
 	</logging>
 
+	<listeners>
+    <listener class="\Mockery\Adapter\Phpunit\TestListener"></listener>
+	</listeners>
 </phpunit>
