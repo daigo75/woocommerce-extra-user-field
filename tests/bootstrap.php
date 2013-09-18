@@ -6,17 +6,12 @@
  * @param array required_plugins An array of the required plugins.
  */
 if(!function_exists('enable_require_plugins')) {
-	function enable_require_plugins(array $required_plugins) {
+	function enable_required_plugins(array $required_plugins) {
 		// Disable reporting of everything but errors. This is done because activating
 		// plugins at this stage may cause warnings to be issued about "headers already
 		// sent by", which we should ignore
 		$error_reporting_original = error_reporting();
 		error_reporting(E_ERROR);
-
-		// Try to activate all required plugins
-		$required_plugins = array(
-			'woocommerce/woocommerce.php',
-		);
 
 		foreach($required_plugins as $plugin) {
 			printf("Activating plugin '%s'...\n", $plugin);
@@ -54,3 +49,9 @@ if(file_exists($composer_autoloader)) {
    exit("Couldn't find path to composer autoloader. Expected location: '$composer_autoloader'.\n");
 }
 
+// Try to activate all required plugins
+$required_plugins = array(
+	'woocommerce/woocommerce.php',
+);
+
+enable_required_plugins($required_plugins);
