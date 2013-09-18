@@ -26,7 +26,7 @@ $required_plugins = array(
 foreach($required_plugins as $plugin) {
 	printf("Activating plugin '%s'...\n", $plugin);
 	$result = activate_plugin($plugin);
-	if($result != null) {
+	if($result == null) {
 		echo "Success.\n";
 	}
 	else {
