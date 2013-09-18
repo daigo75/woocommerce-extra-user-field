@@ -7,12 +7,6 @@
  */
 if(!function_exists('enable_require_plugins')) {
 	function enable_required_plugins(array $required_plugins) {
-		// Disable reporting of everything but errors. This is done because activating
-		// plugins at this stage may cause warnings to be issued about "headers already
-		// sent by", which we should ignore
-		$error_reporting_original = error_reporting();
-		error_reporting(E_ERROR);
-
 		foreach($required_plugins as $plugin) {
 			printf("Activating plugin '%s'...\n", $plugin);
 			$result = activate_plugin($plugin);
@@ -26,10 +20,14 @@ if(!function_exists('enable_require_plugins')) {
 				exit(implode("\n", $errors));
 			}
 		}
-
-		error_reporting($error_reporting_original);
 	}
 }
+
+// Disable reporting of everything but errors. This is done because bootstrapping
+// WP at this stage may cause warnings to be issued about "headers already
+// sent by", which we can safely ignore
+$error_reporting_original = error_reporting();
+error_reporting(E_ERROR);
 
 // The path to wordpress-tests
 // Path to wordpress unit test framework
@@ -40,6 +38,9 @@ if(file_exists($path)) {
 } else {
    exit("Couldn't find path to wp_unit bootstrap.php. Expected location: '$path'.\n");
 }
+
+// Restore original error reporting level
+error_reporting($error_reporting_original);
 
 // Load Composer Autoloader
 $composer_autoloader = realpath(__DIR__ . '/../src/vendor/autoload.php');
