@@ -1,5 +1,41 @@
 <?php
 
+/**
+ * Enabled the plugins required by the plugin being tested.
+ *
+ * @param array required_plugins An array of the required plugins.
+ */
+if(!function_exists('enable_require_plugins')) {
+	function enable_require_plugins(array $required_plugins) {
+		// Disable reporting of everything but errors. This is done because activating
+		// plugins at this stage may cause warnings to be issued about "headers already
+		// sent by", which we should ignore
+		$error_reporting_original = error_reporting();
+		error_reporting(E_ERROR);
+
+		// Try to activate all required plugins
+		$required_plugins = array(
+			'woocommerce/woocommerce.php',
+		);
+
+		foreach($required_plugins as $plugin) {
+			printf("Activating plugin '%s'...\n", $plugin);
+			$result = activate_plugin($plugin);
+			if($result == null) {
+				echo "Success.\n";
+			}
+			else {
+				$errors = $result->get_error_messages();
+
+				printf("Could not activate plugin '%s'. See errors below.\n", $plugin);
+				exit(implode("\n", $errors));
+			}
+		}
+
+		error_reporting($error_reporting_original);
+	}
+}
+
 // The path to wordpress-tests
 // Path to wordpress unit test framework
 $path = '/src/wp_unit/bootstrap.php';
@@ -18,21 +54,3 @@ if(file_exists($composer_autoloader)) {
    exit("Couldn't find path to composer autoloader. Expected location: '$composer_autoloader'.\n");
 }
 
-// Try to activate all required plugins
-$required_plugins = array(
-	'woocommerce/woocommerce.php',
-);
-
-foreach($required_plugins as $plugin) {
-	printf("Activating plugin '%s'...\n", $plugin);
-	$result = activate_plugin($plugin);
-	if($result == null) {
-		echo "Success.\n";
-	}
-	else {
-		$errors = $result->get_error_messages();
-
-		printf("Could not activate plugin '%s'. See errors below.\n", $plugin);
-		exit(implode("\n", $errors));
-	}
-}
