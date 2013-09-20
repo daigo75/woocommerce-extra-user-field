@@ -208,7 +208,8 @@
 		<!-- Compress files into a release package -->
 		<property name="compress_source_dir" value="${release_temp_dir}/${plugin_name}" />
 		<property name="compress_includes" value="**" />
-		<property name="compress_excludes" value="${compress_source_dir}/database/**" />
+		<property name="compress_excludes" value="${compress_source_dir}/build, ${compress_source_dir}/tests, ${compress_source_dir}/src/vendor/**/test*, .git*" />
+
 
 		<!-- Debug
 		<echo message="Release dir: ${release_dir}" />
