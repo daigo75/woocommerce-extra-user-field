@@ -202,7 +202,7 @@
 		</condition>
 
 		<copy todir="${release_temp_dir}/${plugin_name}">
-			<fileset dir="${plugin_dir}/src" />
+			<fileset dir="${plugin_dir}" />
 		</copy>
 
 		<!-- Compress files into a release package -->
