@@ -222,6 +222,7 @@
 
 		<zip basedir="${compress_source_dir}"
 				 destfile="${release_dir}/${compress_destination_file}.zip"
+				 includes="${compress_includes}"
 				 excludes="${compress_excludes}"
 				 whenempty="skip" />
 	</target>
