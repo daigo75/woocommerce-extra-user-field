@@ -22,16 +22,16 @@ require_once('general_functions.php');
  */
 class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	// @var string The plugin version.
-	public static $version = '0.2.0';
+	public $version = '0.2.0';
 
 	// @var string The plugin slug
-	public static $plugin_slug = 'wc-aelia-plugin';
+	public $plugin_slug = 'wc-aelia-plugin';
 	// @var string The plugin text domain
-	public static $text_domain = 'wc-aelia-plugin';
+	public $text_domain = 'wc-aelia-plugin';
 	// @var string The key used to store the plugin settings
-	public static $settings_key = 'wc-aelia-plugin';
+	public $settings_key = 'wc-aelia-plugin';
 	// @var string The instance key that identifies the plugin
-	public static $instance_key = 'wc-aelia-plugin';
+	public $instance_key = 'wc-aelia-plugin';
 
 	// @var string The base name of the plugin directory
 	protected $plugin_directory;
@@ -83,7 +83,7 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	 * @return WC_Aelia_Plugin.
 	 */
 	public static function instance() {
-		return $GLOBALS[static::$instance_key];
+		return $GLOBALS[$this->instance_key];
 	}
 
 	/**
@@ -267,7 +267,7 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 		}
 
 		$installer = new $installer_class();
-		return $installer->update(static::$instance_key, static::$version);
+		return $installer->update($this->instance_key, $this->version);
 	}
 
 	/**
@@ -310,7 +310,7 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	 */
 	public function plugins_loaded() {
 		$class = get_class($this);
-		load_plugin_textdomain(static::$text_domain, false, dirname(plugin_basename(__FILE__)) . '/');
+		load_plugin_textdomain($this->text_domain, false, dirname(plugin_basename(__FILE__)) . '/');
 	}
 
 	/**
@@ -376,14 +376,14 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	 */
 	public function register_styles() {
 		// Register Admin stylesheet
-		wp_register_style(static::$plugin_slug . '-admin',
+		wp_register_style($this->plugin_slug . '-admin',
 											$this->url('plugin') . '/design/css/admin.css',
 											array(),
 											null,
 											'all');
 
 		// Register Frontend stylesheet
-		wp_register_style(static::$plugin_slug . '-frontend',
+		wp_register_style($this->plugin_slug . '-frontend',
 											$this->url('plugin') . '/design/css/frontend.css',
 											array(),
 											null,
@@ -396,7 +396,7 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	public function load_admin_scripts() {
 		// Styles
 		// Enqueue the required Admin stylesheets
-		wp_enqueue_style(static::$plugin_slug . '-admin');
+		wp_enqueue_style($this->plugin_slug . '-admin');
 
 		// JavaScript
 		// TODO Enqueue scripts for Admin section
@@ -407,7 +407,7 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	 */
 	public function load_frontend_scripts() {
 		// Enqueue the required Frontend stylesheets
-		wp_enqueue_style(static::$plugin_slug . '-frontend');
+		wp_enqueue_style($this->plugin_slug . '-frontend');
 
 		// JavaScript
 		// TODO Enqueue scripts for frontend
@@ -424,7 +424,7 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 		$errors = array();
 		foreach($required_extensions as $extension) {
 			if(!extension_loaded($extension)) {
-				$errors[] = sprintf(__('Missing requirement: this plugin requires "%s" extension.', static::$text_domain),
+				$errors[] = sprintf(__('Missing requirement: this plugin requires "%s" extension.', $this->text_domain),
 														$extension);
 			}
 		}
@@ -444,7 +444,7 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 
 		// TODO Move this requirement check before the plugin is loaded, so that it can trigger a proper error messages instead of a fatal error when PHP version is too old
 		if(PHP_VERSION < '5.3') {
-			$errors[] = __('Missing requirement: this plugin requires PHP 5.3 or greater.', static::$text_domain);
+			$errors[] = __('Missing requirement: this plugin requires PHP 5.3 or greater.', $this->text_domain);
 		}
 
 		// Check that all required extensions are loaded
