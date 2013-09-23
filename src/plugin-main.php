@@ -17,30 +17,17 @@ require_once(__DIR__ . '/vendor/autoload.php');
  * Localisation
  **/
 class WC_Aelia_Template_Plugin extends WC_Aelia_Plugin {
-	public static $instance_key = 'wc-aelia-template-plugin';
 	public static $version = '0.2.0';
 
-	/**
-	 * Constructor.
-	 *
-	 * @param WC_Aelia_Settings settings_controller The controller that will handle
-	 * the plugin settings.
-	 * @param WC_Aelia_Messages messages_controller The controller that will handle
-	 * the messages produced by the plugin.
-	 */
-	public function __construct(WC_Aelia_Settings $settings_controller,
-															WC_Aelia_Messages $messages_controller) {
-		parent::__construct($settings_controller, $messages_controller);
-
-		$this->plugin_slug = self::$instance_key;
-		$this->text_domain = self::$instance_key;
-		$this->settings_key = self::$instance_key;
-	}
+	public static $instance_key = 'wc-aelia-template-plugin';
+	public static $plugin_slug = 'wc-aelia-template-plugin';
+	public static $text_domain = 'wc-aelia-template-plugin';
+	public static $settings_key = 'wc-aelia-template-plugin';
 
 	public static function factory() {
 		$settings_page_renderer = new WC_Aelia_Settings_Renderer();
-		$settings_controller = new WC_Aelia_Settings($this->settings_key,
-																								 $this->text_domain,
+		$settings_controller = new WC_Aelia_Settings(self::$settings_key,
+																								 self::$text_domain,
 																								 $settings_page_renderer);
 		$messages_controller = new WC_Aelia_Messages();
 
@@ -49,4 +36,4 @@ class WC_Aelia_Template_Plugin extends WC_Aelia_Plugin {
 	}
 }
 
-$GLOBALS['template_plugin'] = WC_Aelia_Template_Plugin::factory();
+$GLOBALS[WC_Aelia_Template_Plugin::$plugin_slug] = WC_Aelia_Template_Plugin::factory();
