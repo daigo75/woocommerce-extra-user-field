@@ -353,18 +353,18 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	 */
 	public function register_js() {
 		// Register Admin JavaScript
-		//wp_register_script('wc-aelia-template-widget',
-		//									 $this->url('plugin') . '/js/frontend/wc-aelia-template-widget.js',
-		//									 array('jquery'),
-		//									 null,
-		//									 false);
+		wp_register_script(static::$plugin_slug . '-admin',
+											 $this->url('plugin') . '/js/admin/admin.js',
+											 array('jquery'),
+											 null,
+											 false);
 
 		// Register Frontend JavaScript
-		//wp_register_script('wc-aelia-template-admin',
-		//									 $this->url('plugin') . '/js/admin/wc-aelia-template-admin.js',
-		//									 array('jquery'),
-		//									 null,
-		//									 true);
+		wp_register_script(static::$plugin_slug . '-frontend',
+											 $this->url('plugin') . '/js/frontend/frontend.js',
+											 array('jquery'),
+											 null,
+											 true);
 	}
 
 	/**
