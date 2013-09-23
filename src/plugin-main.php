@@ -19,14 +19,14 @@ require_once(__DIR__ . '/vendor/autoload.php');
 class WC_Aelia_Template_Plugin extends WC_Aelia_Plugin {
 	public static $version = '0.2.0';
 
-	public static $instance_key = 'wc-aelia-template-plugin';
 	public static $plugin_slug = 'wc-aelia-template-plugin';
 	public static $text_domain = 'wc-aelia-template-plugin';
-	public static $settings_key = 'wc-aelia-template-plugin';
 
 	public static function factory() {
+		$settings_key = self::$plugin_slug;
+
 		$settings_page_renderer = new WC_Aelia_Settings_Renderer();
-		$settings_controller = new WC_Aelia_Settings(self::$settings_key,
+		$settings_controller = new WC_Aelia_Settings($settings_key,
 																								 self::$text_domain,
 																								 $settings_page_renderer);
 		$messages_controller = new WC_Aelia_Messages();

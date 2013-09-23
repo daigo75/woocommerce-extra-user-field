@@ -28,10 +28,6 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	public static $plugin_slug = 'wc-aelia-plugin';
 	// @var string The plugin text domain
 	public static $text_domain = 'wc-aelia-plugin';
-	// @var string The key used to store the plugin settings
-	public static $settings_key = 'wc-aelia-plugin';
-	// @var string The instance key that identifies the plugin
-	public static $instance_key = 'wc-aelia-plugin';
 
 	// @var string The base name of the plugin directory
 	protected $plugin_directory;
@@ -83,7 +79,7 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	 * @return WC_Aelia_Plugin.
 	 */
 	public static function instance() {
-		return $GLOBALS[static::$instance_key];
+		return $GLOBALS[static::$plugin_slug];
 	}
 
 	/**
@@ -267,7 +263,7 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 		}
 
 		$installer = new $installer_class();
-		return $installer->update(static::$instance_key, static::$version);
+		return $installer->update(static::$plugin_slug, static::$version);
 	}
 
 	/**
