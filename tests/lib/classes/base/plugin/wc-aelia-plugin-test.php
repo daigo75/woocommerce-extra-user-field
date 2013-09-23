@@ -88,15 +88,6 @@ class WC_Aelia_Plugin_Test extends WP_UnitTestCase {
 		$this->assertTrue($frontend_styles_registered);
 	}
 
-	public function test_set_hooks() {
-		$this->plugin->set_hooks();
-
-		$admin_scripts_enqueued = has_action('admin_enqueue_scripts', array($this->plugin, 'load_admin_scripts'));
-		$frontend_scripts_enqueued = has_action('wp_enqueue_scripts', array($this->plugin, 'load_frontend_scripts'));
-		$this->assertTrue($admin_scripts_enqueued);
-		$this->assertTrue($frontend_scripts_enqueued);
-	}
-
 	public function test_load_admin_scripts() {
 		$this->plugin->load_admin_scripts();
 
