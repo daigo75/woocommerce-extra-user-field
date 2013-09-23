@@ -382,6 +382,9 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 											null,
 											'all');
 
+		//var_dump(static::$plugin_slug . '-admin',
+		//									$this->url('plugin') . '/design/css/admin.css');
+
 		// Register Frontend stylesheet
 		wp_register_style(static::$plugin_slug . '-frontend',
 											$this->url('plugin') . '/design/css/frontend.css',
