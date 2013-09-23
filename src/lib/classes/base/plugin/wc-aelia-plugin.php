@@ -22,7 +22,7 @@ require_once('general_functions.php');
  */
 class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	// @var string The plugin version.
-	public static $version = '0.0.1';
+	public static $version = '0.2.0';
 
 	// @var string The plugin slug
 	public static $plugin_slug = 'wc-aelia-plugin';
@@ -142,6 +142,8 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	 * Sets the hook handlers for WooCommerce and WordPress.
 	 */
 	protected function set_hooks() {
+		add_action('admin_enqueue_scripts', array($this, 'load_admin_scripts'));
+		add_action('wp_enqueue_scripts', array($this, 'load_frontend_scripts'));
 	}
 
 	/**
