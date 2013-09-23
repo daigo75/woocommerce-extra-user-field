@@ -69,7 +69,7 @@
 			<arg value="-l" />
 			<fileset dir="${basedir}/.">
 				<include name="**/*.php" />
-				<exclude name="src/vendor/**/*.php" />
+				<exclude name="src/vendor/**" />
 				<modified />
 			</fileset>
 			<fileset dir="${basedir}/tests">
