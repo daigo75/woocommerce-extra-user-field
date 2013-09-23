@@ -18,7 +18,8 @@ class WC_Aelia_Plugin_Test extends WP_UnitTestCase {
 
 		$this->plugin = new WC_Aelia_Plugin($this->settings, $this->messages);
 
-		$GLOBALS[$this->plugin->instance_key] = $this->plugin;
+		$plugin_class = get_class($this->plugin);
+		$GLOBALS[$plugin_class::$instance_key] = $this->plugin;
 	}
 
 	public function test_settings_controller() {

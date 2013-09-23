@@ -17,6 +17,9 @@ require_once(__DIR__ . '/vendor/autoload.php');
  * Localisation
  **/
 class WC_Aelia_Template_Plugin extends WC_Aelia_Plugin {
+	public static $instance_key = 'wc-aelia-template-plugin';
+	public static $version = '0.2.0';
+
 	/**
 	 * Constructor.
 	 *
@@ -29,10 +32,9 @@ class WC_Aelia_Template_Plugin extends WC_Aelia_Plugin {
 															WC_Aelia_Messages $messages_controller) {
 		parent::__construct($settings_controller, $messages_controller);
 
-		$this->plugin_slug = 'wc-aelia-template-plugin';
-		$this->text_domain = $this->plugin_slug;
-		$this->settings_key = $this->plugin_slug;
-		$this->instance_key = $this->plugin_slug;
+		$this->plugin_slug = self::$instance_key;
+		$this->text_domain = self::$instance_key;
+		$this->settings_key = self::$instance_key;
 	}
 
 	public static function factory() {

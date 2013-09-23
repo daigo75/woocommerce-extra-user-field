@@ -22,7 +22,9 @@ require_once('general_functions.php');
  */
 class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	// @var string The plugin version.
-	public $version = '0.2.0';
+	public static $version = '0.2.0';
+	// @var string The instance key that identifies the plugin
+	public static $instance_key = 'wc-aelia-plugin';
 
 	// @var string The plugin slug
 	public $plugin_slug = 'wc-aelia-plugin';
@@ -30,8 +32,6 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	public $text_domain = 'wc-aelia-plugin';
 	// @var string The key used to store the plugin settings
 	public $settings_key = 'wc-aelia-plugin';
-	// @var string The instance key that identifies the plugin
-	public $instance_key = 'wc-aelia-plugin';
 
 	// @var string The base name of the plugin directory
 	protected $plugin_directory;
@@ -83,7 +83,7 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	 * @return WC_Aelia_Plugin.
 	 */
 	public static function instance() {
-		return $GLOBALS[$this->instance_key];
+		return $GLOBALS[self::$instance_key];
 	}
 
 	/**
@@ -267,7 +267,7 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 		}
 
 		$installer = new $installer_class();
-		return $installer->update($this->instance_key, $this->version);
+		return $installer->update(self::$instance_key, self::$version);
 	}
 
 	/**
