@@ -29,16 +29,16 @@ class WC_Aelia_Template_Plugin extends WC_Aelia_Plugin {
 															WC_Aelia_Messages $messages_controller) {
 		parent::__construct($settings_controller, $messages_controller);
 
-		self::$plugin_slug = 'wc-aelia-template-plugin';
-		self::$text_domain = self::$plugin_slug;
-		self::$settings_key = self::$plugin_slug;
-		self::$instance_key = self::$plugin_slug;
+		$this->plugin_slug = 'wc-aelia-template-plugin';
+		$this->text_domain = $this->plugin_slug;
+		$this->settings_key = $this->plugin_slug;
+		$this->instance_key = $this->plugin_slug;
 	}
 
 	public static function factory() {
 		$settings_page_renderer = new WC_Aelia_Settings_Renderer();
-		$settings_controller = new WC_Aelia_Settings(self::$settings_key,
-																								 self::$text_domain,
+		$settings_controller = new WC_Aelia_Settings($this->settings_key,
+																								 $this->text_domain,
 																								 $settings_page_renderer);
 		$messages_controller = new WC_Aelia_Messages();
 
