@@ -167,6 +167,10 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 		$this->paths['design'] = $this->path('plugin') . '/design';
 		$this->paths['css'] = $this->path('design') . '/css';
 		$this->paths['images'] = $this->path('design') . '/images';
+
+		$this->paths['js'] = $this->path('plugin') . '/js';
+		$this->paths['js_admin'] = $this->path('plugin') . '/admin';
+		$this->paths['js_frontend'] = $this->path('js') . '/frontend';
 	}
 
 	/**
@@ -178,6 +182,9 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 		$this->urls['design'] = $this->url('plugin') . '/design';
 		$this->urls['css'] = $this->url('design') . '/css';
 		$this->urls['images'] = $this->url('design') . '/images';
+		$this->urls['js'] = $this->url('plugin') . '/js';
+		$this->urls['js_admin'] = $this->url('plugin') . '/admin';
+		$this->urls['js_frontend'] = $this->url('js') . '/frontend';
 	}
 
 	/**
