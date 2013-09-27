@@ -29,6 +29,9 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	// @var string The plugin text domain
 	public static $text_domain = 'wc-aelia-plugin';
 
+	// @var array Holds a list of the errors related to missing requirements
+	public static $requirements_errors = array();
+
 	// @var string The base name of the plugin directory
 	protected $plugin_directory;
 
@@ -426,11 +429,11 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	 * @return array An array of error messages containing one entry for each
 	 * extension that is not loaded.
 	 */
-	protected function check_required_extensions(array $required_extensions) {
+	protected static function check_required_extensions(array $required_extensions) {
 		$errors = array();
 		foreach($required_extensions as $extension) {
 			if(!extension_loaded($extension)) {
-				$errors[] = sprintf(__('Missing requirement: this plugin requires "%s" extension.', static::$text_domain),
+				$errors[] = sprintf(__('Plugin requires "%s" PHP extension.', AELIA_CS_PLUGIN_TEXTDOMAIN),
 														$extension);
 			}
 		}
@@ -441,36 +444,58 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	/**
 	 * Checks that plugin requirements are satisfied.
 	 *
-	 * @param array errors An array that will contain all errors eventually
-	 * generated.
 	 * @return bool
 	 */
-	protected function check_requirements(&$errors = array()) {
-		$errors = array();
-
-		// TODO Move this requirement check before the plugin is loaded, so that it can trigger a proper error messages instead of a fatal error when PHP version is too old
+	public static function check_requirements() {
+		static::$requirements_errors = array();
 		if(PHP_VERSION < '5.3') {
-			$errors[] = __('Missing requirement: this plugin requires PHP 5.3 or greater.', static::$text_domain);
+			static::$requirements_errors[] = __('Plugin requires PHP 5.3 or greater.', static::$text_domain);
+		}
+
+		// Check for WooCommerce presence
+		if(!self::is_woocommerce_active()) {
+			static::$requirements_errors[] = __('WooCommerce plugin must be installed and activated.', static::$text_domain);
 		}
 
 		// Check that all required extensions are loaded
 		$required_extensions = array(
+			//'curl',
 		);
-		$extension_errors = $this->check_required_extensions($required_extensions);
+		$extension_errors = self::check_required_extensions($required_extensions);
 
-		$errors = array_merge($errors, $extension_errors);
+		static::$requirements_errors = array_merge(static::$requirements_errors, $extension_errors);
 
-		return $errors;
+		return empty(static::$requirements_errors);
+	}
+
+	/**
+	 * Display requirements errors that prevented the plugin from being loaded.
+	 */
+	public static function plugin_requirements_notices() {
+		if(empty(static::$requirements_errors)) {
+			return;
+		}
+
+		// Inline CSS styles have to be used because plugin is not loaded if
+		// requirements are missing, therefore the plugin's CSS files are ignored
+		echo '<div class="error fade">';
+		echo '<h4 class="wc_aelia message_header" style="margin: 1em 0 0 0">';
+		echo __('Currency Switcher could not be loaded due to missing requirements', static::$text_domain);
+		echo '</h4>';
+		echo '<ul style="list-style: disc inside">';
+		echo '<li>';
+		echo implode('</li><li>', static::$requirements_errors);
+		echo '</li>';
+		echo '</ul>';
+		echo '</div>';
 	}
 
 	/**
 	 * Setup function. Called when plugin is enabled.
 	 */
 	public function setup() {
-		$errors = array();
-		$this->check_requirements($errors);
-		if(!empty($errors)) {
-			die(implode('<br>', $errors));
+		if(!empty(static::$requirements_errors)) {
+			die(implode('<br>', static::$requirements_errors));
 		}
 	}
 

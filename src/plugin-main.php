@@ -36,4 +36,12 @@ class WC_Aelia_Template_Plugin extends WC_Aelia_Plugin {
 	}
 }
 
-$GLOBALS[WC_Aelia_Template_Plugin::$plugin_slug] = WC_Aelia_Template_Plugin::factory();
+
+if(WC_Aelia_Template_Plugin::check_requirements() == true) {
+	// Instantiate plugin and add it to the set of globals
+	$GLOBALS[WC_Aelia_Template_Plugin::$plugin_slug] = WC_Aelia_Template_Plugin::factory();
+}
+else {
+	// If requirements are missing, display the appropriate notices
+	add_action('admin_notices', array('WC_Aelia_Template_Plugin', 'plugin_requirements_notices'));
+}
