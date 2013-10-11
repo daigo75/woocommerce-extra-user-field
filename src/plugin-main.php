@@ -17,7 +17,7 @@ require_once(__DIR__ . '/vendor/autoload.php');
  * Localisation
  **/
 class WC_Aelia_Template_Plugin extends WC_Aelia_Plugin {
-	public static $version = '0.2.0';
+	public static $version = '0.3.0';
 
 	public static $plugin_slug = 'wc-aelia-template-plugin';
 	public static $text_domain = 'wc-aelia-template-plugin';

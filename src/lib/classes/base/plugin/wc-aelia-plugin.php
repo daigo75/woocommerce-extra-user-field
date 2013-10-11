@@ -172,7 +172,7 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 		$this->paths['images'] = $this->path('design') . '/images';
 
 		$this->paths['js'] = $this->path('plugin') . '/js';
-		$this->paths['js_admin'] = $this->path('plugin') . '/admin';
+		$this->paths['js_admin'] = $this->path('js') . '/admin';
 		$this->paths['js_frontend'] = $this->path('js') . '/frontend';
 	}
 
