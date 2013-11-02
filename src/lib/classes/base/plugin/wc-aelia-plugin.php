@@ -520,14 +520,26 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 		}
 
 		$woocommerce_plugin_key = 'woocommerce/woocommerce.php';
-		$result = in_array($woocommerce_plugin_key, get_option('active_plugins'));
-
-		if(!$result && function_exists('is_multisite') && is_multisite()) {
-			$result = array_key_exists($woocommerce_plugin_key, get_site_option('active_sitewide_plugins'));
-		}
+		$result = self::is_plugin_active($woocommerce_plugin_key);
 
 		define('WOOCOMMERCE_ACTIVE', $result);
 
 		return WOOCOMMERCE_ACTIVE;
+	}
+
+	/**
+	 * Checks if a plugin is active and returns a value to indicate it.
+	 *
+	 * @param string plugin_key The key of the plugin to check.
+	 * @return bool
+	 */
+	public static function is_plugin_active($plugin_key) {
+		$result = in_array($plugin_key, get_option('active_plugins'));
+
+		if(!$result && function_exists('is_multisite') && is_multisite()) {
+			$result = array_key_exists($plugin_key, get_site_option('active_sitewide_plugins'));
+		}
+
+		return $result;
 	}
 }
