@@ -28,6 +28,8 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	public static $plugin_slug = 'wc-aelia-plugin';
 	// @var string The plugin text domain
 	public static $text_domain = 'wc-aelia-plugin';
+	// @var string The plugin name
+	public static $plugin_name = 'wc-aelia-plugin';
 
 	// @var array Holds a list of the errors related to missing requirements
 	public static $requirements_errors = array();
@@ -517,7 +519,8 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 		// requirements are missing, therefore the plugin's CSS files are ignored
 		echo '<div class="error fade">';
 		echo '<h4 class="wc_aelia message_header" style="margin: 1em 0 0 0">';
-		echo __('Currency Switcher could not be loaded due to missing requirements', static::$text_domain);
+		echo sprintf(__('Plugin %s could not be loaded due to missing requirements', static::$text_domain),
+								 static::$plugin_name);
 		echo '</h4>';
 		echo '<ul style="list-style: disc inside">';
 		echo '<li>';
