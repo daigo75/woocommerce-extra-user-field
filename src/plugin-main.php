@@ -22,6 +22,9 @@ class WC_Aelia_Template_Plugin extends WC_Aelia_Plugin {
 	public static $text_domain = 'wc-aelia-template-plugin';
 
 	public static function factory() {
+		// Load Composer autoloader
+		require_once(__DIR__ . '/vendor/autoload.php');
+
 		$settings_key = self::$plugin_slug;
 
 		$settings_page_renderer = new WC_Aelia_Settings_Renderer();
