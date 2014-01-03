@@ -444,7 +444,7 @@ class WC_Aelia_Settings_Renderer {
 		$multiline = get_value('multiline', $attributes);
 
 		if($multiline) {
-			echo $this->get_textarea_html('text', $field_id, $value, $attributes, $field_name);
+			echo $this->get_textarea_html($field_id, $value, $attributes, $field_name);
 		}
 		else {
 			echo $this->get_input_html('text', $field_id, $value, $attributes, $field_name);
