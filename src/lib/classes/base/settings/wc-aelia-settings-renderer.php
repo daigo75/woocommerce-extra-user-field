@@ -152,17 +152,41 @@ class WC_Aelia_Settings_Renderer {
 	}
 
 	/**
+	 * Returns the title for the menu item that will bring to the plugin's
+	 * settings page.
+	 *
+	 * @return string
+	 */
+	protected function menu_title() {
+		return __('Template plugin', $this->_textdomain);
+	}
+
+	/**
+	 * Returns the slug for the menu item that will bring to the plugin's
+	 * settings page.
+	 *
+	 * @return string
+	 */
+	protected function menu_slug() {
+		return 'template-plugin';
+	}
+
+	/**
 	 * Returns the title for the settings page.
+	 *
+	 * @return string
 	 */
 	protected function page_title() {
-		return __('Default page title - Override in descendant renderer', $this->_textdomain);
+		return __('Template plugin settings', $this->_textdomain);
 	}
 
 	/**
 	 * Returns the description for the settings page.
+	 *
+	 * @return string
 	 */
 	protected function page_description() {
-		return __('Default page description - Override in descendant renderer', $this->_textdomain);
+		return __('Sample page description', $this->_textdomain);
 	}
 
 	/**
@@ -269,7 +293,16 @@ class WC_Aelia_Settings_Renderer {
 	 * Adds a link to Settings Page in WooCommerce Admin menu.
 	 */
 	public function add_settings_page() {
-		// To be implemented by descendant class
+		$settings_page = add_submenu_page(
+			'woocommerce',
+	    $this->page_title(),
+	    $this->menu_title(),
+			'manage_options',
+			$this->menu_slug(),
+			array($this, 'render_options_page')
+		);
+
+		add_action('load-' . $settings_page, array($this, 'options_page_load'));
 	}
 
 	/**
