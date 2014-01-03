@@ -275,7 +275,7 @@ class WC_Aelia_Settings_Renderer {
 	public function render_options_page() {
 		echo '<div class="wrap">';
 		echo '<div class="icon32" id="icon-options-general"></div>';
-		echo '<h2>' . $this->page_title() . printf('&nbsp;(v. %s)', WC_Blacklister_Plugin::$version) . '</h2>';
+		echo '<h2>' . $this->page_title() . '</h2>';
 		echo '<p>' . $this->page_description() . '</p>';
 
 		settings_errors();
