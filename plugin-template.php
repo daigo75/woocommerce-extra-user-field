@@ -3,7 +3,7 @@
 Plugin Name: WooCommerce Plugin Template
 Description: This is a WooCommerce plugin template
 Author: Diego Zanella
-Version: 0.5.0
+Version: 0.6.0
 */
 
 require_once 'src/plugin-main.php';

@@ -388,6 +388,30 @@ class WC_Aelia_Settings_Renderer {
 	}
 
 	/**
+	 * Build the HTML to represent a <textarea> element.
+	 *
+	 * @param string field_id The ID of the field.
+	 * @param string value The field value.
+	 * @param array attribues Additional field attributes.
+	 * @param string field_name The name of the field. If unspecified, the field
+	 * ID will be taken.
+	 * @return string The HTML representation of the field.
+	 */
+	protected function get_textarea_html($field_id, $value, $attributes, $field_name = null) {
+		$field_name = !empty($field_name) ? $field_name : $field_id;
+
+		$html =
+			'<textarea ' .
+			'id="' . $field_id . '" ' .
+			'name="' . $field_name . '" ' .
+			'value="' . $value . '" ' .
+			$this->attributes_to_string($attributes) .
+			' />';
+
+		return $html;
+	}
+
+	/**
 	 * Renders a hidden field.
 	 *
 	 * @param array args An array of arguments passed by add_settings_field().
@@ -404,7 +428,8 @@ class WC_Aelia_Settings_Renderer {
 	}
 
 	/**
-	 * Renders a text box.
+	 * Renders a text box (input or textarea). To render a textarea, pass an
+	 * attribute named "multiline" set to true.
 	 *
 	 * @param array args An array of arguments passed by add_settings_field().
 	 * @see add_settings_field().
@@ -416,7 +441,14 @@ class WC_Aelia_Settings_Renderer {
 		$attributes = get_value('attributes', $args, array());
 		$value = get_value('value', $args, '');
 
-		echo $this->get_input_html('text', $field_id, $value, $attributes, $field_name);
+		$multiline = get_value('multiline', $attributes);
+
+		if($multiline) {
+			echo $this->get_textarea_html('text', $field_id, $value, $attributes, $field_name);
+		}
+		else {
+			echo $this->get_input_html('text', $field_id, $value, $attributes, $field_name);
+		}
 	}
 
 	/**
