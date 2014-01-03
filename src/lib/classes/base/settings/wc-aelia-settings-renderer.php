@@ -405,7 +405,7 @@ class WC_Aelia_Settings_Renderer {
 			'id="' . $field_id . '" ' .
 			'name="' . $field_name . '" ' .
 			$this->attributes_to_string($attributes) .
-			' />' . $value . '</textarea>';
+			'>' . $value . '</textarea>';
 
 		return $html;
 	}
