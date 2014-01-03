@@ -3,9 +3,6 @@
 //define('SCRIPT_DEBUG', 1);
 //error_reporting(E_ALL);
 
-// Load Composer autoloader
-require_once(__DIR__ . '/vendor/autoload.php');
-
 /**
  * Check if WooCommerce is active
  */
@@ -13,11 +10,13 @@ require_once(__DIR__ . '/vendor/autoload.php');
 //	return;
 //}
 
+require_once('lib/classes/base/plugin/wc-aelia-plugin.php');
+
 /**
- * Localisation
+ * Template plugin.
  **/
 class WC_Aelia_Template_Plugin extends WC_Aelia_Plugin {
-	public static $version = '0.4.0';
+	public static $version = '0.5.0';
 
 	public static $plugin_slug = 'wc-aelia-template-plugin';
 	public static $text_domain = 'wc-aelia-template-plugin';
@@ -33,6 +32,22 @@ class WC_Aelia_Template_Plugin extends WC_Aelia_Plugin {
 
 		$plugin_instance = new WC_Aelia_Template_Plugin($settings_controller, $messages_controller);
 		return $plugin_instance;
+	}
+
+	/**
+	 * Constructor.
+	 *
+	 * @param WC_Aelia_Settings settings_controller The controller that will handle
+	 * the plugin settings.
+	 * @param WC_Aelia_Messages messages_controller The controller that will handle
+	 * the messages produced by the plugin.
+	 */
+	public function __construct(WC_Aelia_Settings $settings_controller,
+															WC_Aelia_Messages $messages_controller) {
+		// Load Composer autoloader
+		require_once(__DIR__ . '/vendor/autoload.php');
+
+		parent::__construct($settings_controller, $messages_controller);
 	}
 }
 
