@@ -20,6 +20,7 @@ class WC_Aelia_Template_Plugin extends WC_Aelia_Plugin {
 
 	public static $plugin_slug = 'wc-aelia-template-plugin';
 	public static $text_domain = 'wc-aelia-template-plugin';
+	public static $plugin_name = 'Template Plugin';
 
 	public static function factory() {
 		// Load Composer autoloader
