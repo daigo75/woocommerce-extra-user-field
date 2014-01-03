@@ -362,6 +362,21 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	 * Registers the JavaScript files required by the plugin.
 	 */
 	public function register_js() {
+		wp_register_script('jquery-ui',
+											 '//code.jquery.com/ui/1.10.3/jquery-ui.js',
+											 array('jquery'),
+											 null,
+											 true);
+
+		// If jQuery Chosen is not registered, then add it to the list
+		if(wp_script_is('chosen', 'registered') == false) {
+			wp_register_script('chosen',
+												 '//cdnjs.cloudflare.com/ajax/libs/chosen/0.9.12/chosen.jquery.min.js',
+												 array('jquery'),
+												 null,
+												 true);
+		}
+
 		// Register Admin JavaScript
 		wp_register_script(static::$plugin_slug . '-admin',
 											 $this->url('plugin') . '/js/admin/admin.js',
@@ -381,6 +396,21 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	 * Registers the Style files required by the plugin.
 	 */
 	public function register_styles() {
+		wp_register_style('jquery-ui',
+											'//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css',
+											array(),
+											null,
+											'all');
+
+		// If CSS for jQuery Chosen is not registered, then add it to the list
+		if(wp_style_is('chosen', 'registered') == false) {
+			wp_register_style('chosen',
+												'//cdnjs.cloudflare.com/ajax/libs/chosen/0.9.12/chosen.css',
+												array(),
+												null,
+												'all');
+		}
+
 		// Register Admin stylesheet
 		wp_register_style(static::$plugin_slug . '-admin',
 											$this->url('plugin') . '/design/css/admin.css',
@@ -404,11 +434,18 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	 */
 	public function load_admin_scripts() {
 		// Styles
+		wp_enqueue_style('jquery-ui');
+		wp_enqueue_style('chosen');
+
 		// Enqueue the required Admin stylesheets
 		wp_enqueue_style(static::$plugin_slug . '-admin');
 
 		// JavaScript
-		// TODO Enqueue scripts for Admin section
+		wp_enqueue_script('jquery-ui');
+		wp_enqueue_script('chosen');
+
+		// Enqueue the required Admin scripts
+		wp_enqueue_script(static::$plugin_slug . '-admin');
 	}
 
 	/**
@@ -419,7 +456,7 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 		wp_enqueue_style(static::$plugin_slug . '-frontend');
 
 		// JavaScript
-		// TODO Enqueue scripts for frontend
+		wp_enqueue_script(static::$plugin_slug . '-frontend');
 	}
 
 	/**
