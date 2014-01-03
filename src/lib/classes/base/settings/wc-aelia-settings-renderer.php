@@ -152,6 +152,20 @@ class WC_Aelia_Settings_Renderer {
 	}
 
 	/**
+	 * Returns the title for the settings page.
+	 */
+	protected function page_title() {
+		return __('Default page title - Override in descendant renderer', $this->_textdomain);
+	}
+
+	/**
+	 * Returns the description for the settings page.
+	 */
+	protected function page_description() {
+		return __('Default page description - Override in descendant renderer', $this->_textdomain);
+	}
+
+	/**
 	 * Renders all settings sections added to a particular settings page. This
 	 * method is an almost exact clone of global do_settings_sections(), the main
 	 * difference is that each section is wrapped in its own <div>.
@@ -222,10 +236,33 @@ class WC_Aelia_Settings_Renderer {
 	}
 
 	/**
+	 * Renders the buttons at the bottom of the settings page.
+	 */
+	protected function render_buttons() {
+		submit_button(__('Save Changes', $this->_textdomain),
+							'primary',
+							'submit',
+							false);
+	}
+
+	/**
 	 * Renders the Options page for the plugin.
 	 */
 	public function render_options_page() {
-		// To be implemented by descendant class
+		echo '<div class="wrap">';
+		echo '<div class="icon32" id="icon-options-general"></div>';
+		echo '<h2>' . $this->page_title() . printf('&nbsp;(v. %s)', WC_Blacklister_Plugin::$version) . '</h2>';
+		echo '<p>' . $this->page_description() . '</p>';
+
+		settings_errors();
+		echo '<form id="' . $this->_settings_key . '_form" method="post" action="options.php">';
+		settings_fields($this->_settings_key);
+		//do_settings_sections($this->_settings_key);
+		$this->render_settings_sections($this->_settings_key);
+		echo '<div class="buttons">';
+		$this->render_buttons();
+		echo '</div>';
+		echo '</form>';
 	}
 
 	/**
