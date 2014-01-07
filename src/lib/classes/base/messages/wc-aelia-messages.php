@@ -78,6 +78,6 @@ class WC_Aelia_Messages {
 	 * compatibility.
 	 */
 	public function get_error_message($error_code) {
-		$this->get_message($error_code);
+		return $this->get_message($error_code);
 	}
 }
