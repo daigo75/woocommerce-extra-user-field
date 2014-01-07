@@ -22,7 +22,7 @@ require_once('general_functions.php');
  */
 class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	// @var string The plugin version.
-	public static $version = '0.2.0';
+	public static $version = '0.6.1';
 
 	// @var string The plugin slug
 	public static $plugin_slug = 'wc-aelia-plugin';
@@ -318,7 +318,7 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	 */
 	public function plugins_loaded() {
 		$class = get_class($this);
-		load_plugin_textdomain(static::$text_domain, false, dirname(plugin_basename(__FILE__)) . '/');
+		load_plugin_textdomain(static::$text_domain, false, dirname(plugin_basename(__FILE__)) . '/languages/');
 	}
 
 	/**
