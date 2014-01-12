@@ -22,7 +22,7 @@ require_once('general_functions.php');
  */
 class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	// @var string The plugin version.
-	public static $version = '0.6.1';
+	public static $version = '0.7';
 
 	// @var string The plugin slug
 	public static $plugin_slug = 'wc-aelia-plugin';
@@ -41,6 +41,8 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	protected $_settings_controller;
 	// @var WC_Aelia_Messages The object that will handle plugin's messages.
 	protected $_messages_controller;
+	// @var Aelia_SessionManager The session manager
+	protected $_session;
 
 	protected $paths = array(
 		// This array will contain the paths used by the plugin
@@ -58,6 +60,18 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	protected function woocommerce() {
 		global $woocommerce;
 		return $woocommerce;
+	}
+
+	/**
+	 * Returns the session manager.
+	 *
+	 * @return object The global instance of woocommerce.
+	 */
+	protected function session() {
+		if(empty($this->_session)) {
+			$this->_session = new Aelia_SessionManager();
+		}
+		return $this->_session;
 	}
 
 	/**

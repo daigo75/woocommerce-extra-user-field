@@ -16,7 +16,7 @@ require_once('lib/classes/base/plugin/wc-aelia-plugin.php');
  * Template plugin.
  **/
 class WC_Aelia_Template_Plugin extends WC_Aelia_Plugin {
-	public static $version = '0.6.1';
+	public static $version = '0.7';
 
 	public static $plugin_slug = 'wc-aelia-template-plugin';
 	public static $text_domain = 'wc-aelia-template-plugin';
