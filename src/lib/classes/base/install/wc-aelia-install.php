@@ -233,6 +233,7 @@ class WC_Aelia_Install {
 																			'skipped. Please report this issue to Support'),
 																	 get_class($this),
 																	 $method));
+				continue;
 			}
 			try {
 				$this->add_message(E_USER_NOTICE,
