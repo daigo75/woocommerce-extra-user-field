@@ -245,13 +245,13 @@ class WC_Aelia_Install {
 				}
 			}
 			catch(Exception $e) {
-				$this->add_error(E_USER_WARNING,
-												 sprintf(__('Update method "%s::%s() raised exception "%s". Update halted. ' .
-																		'Please contact Support and provide the error details ' .
-																		'that you will find below.'),
-																 $e->getMessage(),
-																 get_class($this),
-																 $method));
+				$this->add_message(E_USER_WARNING,
+													 sprintf(__('Update method "%s::%s() raised exception "%s". Update halted. ' .
+																			'Please contact Support and provide the error details ' .
+																			'that you will find below.'),
+																	 $e->getMessage(),
+																	 get_class($this),
+																	 $method));
 				$result = false;
 			}
 		}
