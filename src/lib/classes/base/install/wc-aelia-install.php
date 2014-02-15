@@ -145,18 +145,13 @@ class WC_Aelia_Install {
 		if(empty($current_version)) {
 			$current_version = '0';
 		}
-		else {
-			// Strip all special characters so that the version can be compared with
-			// update methods
-			$current_version = $this->get_alphanum_version($current_version);
-		}
 		$update_methods = array();
 
 		$class_methods = get_class_methods($this);
 		foreach($class_methods as $method) {
 			if(stripos($method, self::UPDATE_METHOD_PREFIX) === 0) {
-				$version = str_ireplace(self::UPDATE_METHOD_PREFIX, '', $method);
-				if($version > $current_version) {
+				$method_version = str_ireplace(self::UPDATE_METHOD_PREFIX, '', $method);
+				if(version_compare($method_version, $current_version, '>')) {
 					$update_methods[$version] = $method;
 				}
 			}
