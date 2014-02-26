@@ -135,13 +135,27 @@ class WC_Aelia_Install {
 	}
 
 	/**
+	 * Compares the version extracted from two update methods to sort them.
+	 *
+	 * @param string a The version of first method.
+	 * @param string b The version of second method.
+	 * @return int
+	 *
+	 * @see version_compare().
+	 * @see uksort().
+	 */
+	protected function sort_update_methods($a, $b) {
+		return version_compare($a, $b);
+	}
+
+	/**
 	 * Returns a list of the methods that will perform the updates.
 	 *
 	 * @param string current_version Current version of the plugin. This will
 	 * determine which update methods still have to be executed.
 	 * @return array
 	 */
-	private function get_update_methods($current_version) {
+	protected function get_update_methods($current_version) {
 		if(empty($current_version)) {
 			$current_version = '0';
 		}
@@ -156,7 +170,7 @@ class WC_Aelia_Install {
 				}
 			}
 		}
-		ksort($update_methods);
+		uksort($update_methods, array($this, 'sort_update_methods'));
 		return $update_methods;
 	}
 
