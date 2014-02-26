@@ -166,7 +166,7 @@ class WC_Aelia_Install {
 			if(stripos($method, self::UPDATE_METHOD_PREFIX) === 0) {
 				$method_version = str_ireplace(self::UPDATE_METHOD_PREFIX, '', $method);
 				if(version_compare($method_version, $current_version, '>')) {
-					$update_methods[$version] = $method;
+					$update_methods[$method_version] = $method;
 				}
 			}
 		}
