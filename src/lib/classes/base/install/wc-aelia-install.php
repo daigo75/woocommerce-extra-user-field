@@ -222,7 +222,7 @@ class WC_Aelia_Install {
 	 */
 	public function update($plugin_id, $new_version) {
 		$current_version = get_option($plugin_id);
-		if($current_version >= $new_version) {
+		if(version_compare($current_version, $new_version, '>=')) {
 			return true;
 		}
 
