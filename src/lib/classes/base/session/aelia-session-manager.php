@@ -20,13 +20,17 @@ class Aelia_SessionManager {
 
 		// WooCommerce 2.1
 		if(version_compare($woocommerce->version, '2.1', '>=')) {
-			$woocommerce->session->set($key, $value);
+			if(isset($woocommerce->session)) {
+				$woocommerce->session->set($key, $value);
+			}
 			return;
 		}
 
 		// WooCommerce 2.0
 		if(version_compare($woocommerce->version, '2.0', '>=')) {
-			$woocommerce->session->$key = $value;
+			if(isset($woocommerce->session)) {
+				$woocommerce->session->$key = $value;
+			}
 			return;
 		}
 
@@ -88,13 +92,17 @@ class Aelia_SessionManager {
 
 		// WooCommerce 2.1
 		if(version_compare($woocommerce->version, '2.1', '>=')) {
-			$woocommerce->session->set($key, null);
+			if(isset($woocommerce->session)) {
+				$woocommerce->session->set($key, null);
+			}
 			return;
 		}
 
 		// WooCommerce 2.0
 		if(version_compare($woocommerce->version, '2.0', '>=')) {
-			unset($woocommerce->session->$key);
+			if(isset($woocommerce->session)) {
+				unset($woocommerce->session->$key);
+			}
 			return;
 		}
 
