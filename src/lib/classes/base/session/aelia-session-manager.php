@@ -18,13 +18,20 @@ class Aelia_SessionManager {
 	public static function set_value($key, $value) {
 		global $woocommerce;
 
-		if($woocommerce->version >= '2') {
-			// WooCommerce 2.0+
-			$woocommerce->session->$key = $value;
-		} else {
-			// WooCommerce < 2.0
-			$_SESSION[$key] = $value;
+		// WooCommerce 2.1
+		if(version_compare($woocommerce->version, '2.1', '>=')) {
+			$woocommerce->session->set($key, $value);
+			return;
 		}
+
+		// WooCommerce 2.0
+		if(version_compare($woocommerce->version, '2.0', '>=')) {
+			$woocommerce->session->$key = $value;
+			return;
+		}
+
+		// WooCommerce < 2.0
+		$_SESSION[$key] = $value;
 	}
 
 	/**
@@ -40,16 +47,29 @@ class Aelia_SessionManager {
 	public static function get_value($key, $default = null, $remove_after_get = false) {
 		global $woocommerce;
 
-		if($woocommerce->version >= '2') {
-			// WooCommerce 2.0+
+		$result = null;
+
+		// WooCommerce 2.1
+		if(is_null($result) && version_compare($woocommerce->version, '2.1', '>=')) {
+			if(!isset($woocommerce->session)) {
+				return $default;
+			}
+			$result = @$woocommerce->session->get($key);
+		}
+
+		// WooCommerce 2.0
+		if(is_null($result) && version_compare($woocommerce->version, '2.0', '>=')) {
 			if(!isset($woocommerce->session)) {
 				return $default;
 			}
 			$result = @$woocommerce->session->$key;
-		} else {
+		}
+
+		if(is_null($result) && version_compare($woocommerce->version, '1.6', '<=')) {
 			// WooCommerce < 2.0
 			$result = @$_SESSION[$key];
 		}
+
 		if($remove_after_get) {
 			self::delete_value($key);
 		}
@@ -66,12 +86,22 @@ class Aelia_SessionManager {
 	public static function delete_value($key) {
 		global $woocommerce;
 
-		if($woocommerce->version >= '2') {
-			// WooCommerce 2.0+
+		// WooCommerce 2.1
+		if(version_compare($woocommerce->version, '2.1', '>=')) {
+			$woocommerce->session->set($key, null);
+			return;
+		}
+
+		// WooCommerce 2.0
+		if(version_compare($woocommerce->version, '2.0', '>=')) {
 			unset($woocommerce->session->$key);
-		} else {
-			// WooCommerce < 2.0
+			return;
+		}
+
+		// WooCommerce < 2.0
+		if(version_compare($woocommerce->version, '1.6', '<=')) {
 			unset($_SESSION[$key]);
+			return;
 		}
 	}
 }
