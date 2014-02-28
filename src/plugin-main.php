@@ -16,7 +16,7 @@ require_once('lib/classes/base/plugin/wc-aelia-plugin.php');
  * Template plugin.
  **/
 class WC_Aelia_Template_Plugin extends WC_Aelia_Plugin {
-	public static $version = '0.7.2';
+	public static $version = '0.7.3';
 
 	public static $plugin_slug = 'wc-aelia-template-plugin';
 	public static $text_domain = 'wc-aelia-template-plugin';
@@ -28,11 +28,14 @@ class WC_Aelia_Template_Plugin extends WC_Aelia_Plugin {
 
 		$settings_key = self::$plugin_slug;
 
-		$settings_page_renderer = new WC_Aelia_Settings_Renderer();
-		$settings_controller = new WC_Aelia_Settings($settings_key,
-																								 self::$text_domain,
-																								 $settings_page_renderer);
-		$messages_controller = new WC_Aelia_Messages();
+		$settings_controller = null;
+		$messages_controller = null;
+		// Example on how to initialise a settings controller and a messages controller
+		//$settings_page_renderer = new WC_Aelia_Settings_Renderer();
+		//$settings_controller = new WC_Aelia_Settings($settings_key,
+		//																						 self::$text_domain,
+		//																						 $settings_page_renderer);
+		//$messages_controller = new WC_Aelia_Messages();
 
 		$plugin_instance = new WC_Aelia_Template_Plugin($settings_controller, $messages_controller);
 		return $plugin_instance;

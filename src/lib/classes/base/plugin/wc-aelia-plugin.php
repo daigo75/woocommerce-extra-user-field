@@ -22,7 +22,7 @@ require_once('general_functions.php');
  */
 class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	// @var string The plugin version.
-	public static $version = '0.7.2';
+	public static $version = '0.7.3';
 
 	// @var string The plugin slug
 	public static $plugin_slug = 'wc-aelia-plugin';
@@ -239,8 +239,7 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	 * @param WC_Aelia_Messages messages_controller The controller that will handle
 	 * the messages produced by the plugin.
 	 */
-	public function __construct(WC_Aelia_Settings $settings_controller,
-															WC_Aelia_Messages $messages_controller) {
+	public function __construct($settings_controller, $messages_controller) {
 		// Set plugin's paths
 		$this->set_paths();
 		// Set plugin's URLs
