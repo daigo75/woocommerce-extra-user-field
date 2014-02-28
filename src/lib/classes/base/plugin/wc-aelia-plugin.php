@@ -239,7 +239,7 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	 * @param WC_Aelia_Messages messages_controller The controller that will handle
 	 * the messages produced by the plugin.
 	 */
-	public function __construct($settings_controller, $messages_controller) {
+	public function __construct($settings_controller = null, $messages_controller = null) {
 		// Set plugin's paths
 		$this->set_paths();
 		// Set plugin's URLs
