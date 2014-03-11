@@ -55,6 +55,13 @@ class WC_Aelia_Plugin_Test extends WP_UnitTestCase {
 	/* The tests below simply check that the methods run without errors. */
 	public function test_wordpress_loaded() {
 		$this->plugin->wordpress_loaded();
+
+		$frontend_script_registered = wp_script_is(WC_Aelia_Plugin::$plugin_slug . '-frontend', 'registered');
+		$this->assertTrue($frontend_script_registered);
+
+		$frontend_styles_registered = wp_style_is(WC_Aelia_Plugin::$plugin_slug . '-frontend', 'registered');
+		$this->assertTrue($frontend_styles_registered);
+
 		$this->assertTrue(true);
 	}
 
@@ -76,16 +83,6 @@ class WC_Aelia_Plugin_Test extends WP_UnitTestCase {
 	public function test_register_widgets() {
 		$this->plugin->register_widgets();
 		$this->assertTrue(true);
-	}
-
-	public function test_register_styles() {
-		$this->plugin->register_styles();
-
-		$admin_styles_registered = wp_style_is(WC_Aelia_Plugin::$plugin_slug . '-admin', 'registered');
-		$this->assertTrue($admin_styles_registered);
-
-		$frontend_styles_registered = wp_style_is(WC_Aelia_Plugin::$plugin_slug . '-frontend', 'registered');
-		$this->assertTrue($frontend_styles_registered);
 	}
 
 	public function test_load_admin_scripts() {
