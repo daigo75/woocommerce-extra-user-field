@@ -88,15 +88,17 @@ class WC_Aelia_Plugin_Test extends WP_UnitTestCase {
 	public function test_load_admin_scripts() {
 		$this->plugin->load_admin_scripts();
 
+		// Base plugin should NOT enqueue Admin styles
 		$admin_styles_enqueued = wp_style_is(WC_Aelia_Plugin::$plugin_slug . '-admin', 'enqueued');
-		$this->assertTrue($admin_styles_enqueued);
+		$this->assertFalse($admin_styles_enqueued);
 	}
 
 	public function test_load_frontend_scripts() {
 		$this->plugin->load_frontend_scripts();
 
+		// Base plugin should NOT enqueue Admin scripts
 		$frontend_styles_enqueued = wp_style_is(WC_Aelia_Plugin::$plugin_slug . '-frontend', 'enqueued');
-		$this->assertTrue($frontend_styles_enqueued);
+		$this->assertFalse($frontend_styles_enqueued);
 	}
 
 	public function test_setup() {
