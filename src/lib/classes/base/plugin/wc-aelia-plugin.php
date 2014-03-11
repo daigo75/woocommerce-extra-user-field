@@ -308,8 +308,7 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	 * loading.
 	 */
 	public function wordpress_loaded() {
-		$this->register_js();
-		$this->register_styles();
+		$this->register_common_frontend_scripts();
 	}
 
 	/**
@@ -374,69 +373,54 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	}
 
 	/**
-	 * Registers the JavaScript files required by the plugin.
+	 * Determines if one of plugin's admin pages is being rendered. Override it
+	 * if plugin implements pages in the Admin section.
+	 *
+	 * @return bool
 	 */
-	public function register_js() {
-		wp_register_script('jquery-ui',
-											 '//code.jquery.com/ui/1.10.3/jquery-ui.js',
-											 array('jquery'),
-											 null,
-											 true);
+	protected function rendering_plugin_admin_page() {
+		return false;
+	}
 
-		// If jQuery Chosen is not registered, then add it to the list
-		if(wp_script_is('chosen', 'registered') == false) {
-			wp_register_script('chosen',
-												 '//cdnjs.cloudflare.com/ajax/libs/chosen/0.9.12/chosen.jquery.min.js',
-												 array('jquery'),
-												 null,
-												 true);
-		}
+	/**
+	 * Registers the script and style files required in the backend (even outside
+	 * of plugin's pages). Extend in descendant plugins.
+	 */
+	protected function register_common_admin_scripts() {
+		// Dummy
+	}
 
-		// Register Admin JavaScript
+	/**
+	 * Registers the script and style files needed by the admin pages of the
+	 * plugin. Extend in descendant plugins.
+	 */
+	protected function register_plugin_admin_scripts() {
+		// Admin scripts
 		wp_register_script(static::$plugin_slug . '-admin',
 											 $this->url('plugin') . '/js/admin/admin.js',
 											 array('jquery'),
 											 null,
 											 false);
-
-		// Register Frontend JavaScript
-		wp_register_script(static::$plugin_slug . '-frontend',
-											 $this->url('plugin') . '/js/frontend/frontend.js',
-											 array('jquery'),
-											 null,
-											 true);
-	}
-
-	/**
-	 * Registers the Style files required by the plugin.
-	 */
-	public function register_styles() {
-		wp_register_style('jquery-ui',
-											'//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css',
-											array(),
-											null,
-											'all');
-
-		// If CSS for jQuery Chosen is not registered, then add it to the list
-		if(wp_style_is('chosen', 'registered') == false) {
-			wp_register_style('chosen',
-												'//cdnjs.cloudflare.com/ajax/libs/chosen/0.9.12/chosen.css',
-												array(),
-												null,
-												'all');
-		}
-
-		// Register Admin stylesheet
+		// Admin styles
 		wp_register_style(static::$plugin_slug . '-admin',
 											$this->url('plugin') . '/design/css/admin.css',
 											array(),
 											null,
 											'all');
+	}
 
-		//var_dump(static::$plugin_slug . '-admin',
-		//									$this->url('plugin') . '/design/css/admin.css');
-
-		// Register Frontend stylesheet
+	/**
+	 * Registers the script and style files required in the frontend (even outside
+	 * of plugin's pages).
+	 */
+	protected function register_common_frontend_scripts() {
+		// Scripts
+		wp_register_script(static::$plugin_slug . '-frontend',
+											 $this->url('plugin') . '/js/frontend/frontend.js',
+											 array('jquery'),
+											 null,
+											 true);
+		// Styles
 		wp_register_style(static::$plugin_slug . '-frontend',
 											$this->url('plugin') . '/design/css/frontend.css',
 											array(),
@@ -448,30 +432,32 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	 * Loads Styles and JavaScript for the Admin pages.
 	 */
 	public function load_admin_scripts() {
-		// Styles
-		wp_enqueue_style('jquery-ui');
-		wp_enqueue_style('chosen');
+		// Register common JS for the backend
+		$this->register_common_admin_scripts();
+		if($this->rendering_plugin_admin_page()) {
+			// Load Admin scripts only on plugin settings page
+			$this->register_plugin_admin_scripts();
 
-		// Enqueue the required Admin stylesheets
-		wp_enqueue_style(static::$plugin_slug . '-admin');
+			// Styles - Enqueue styles required for plugin Admin page
+			wp_enqueue_style(static::$plugin_slug . '-admin');
 
-		// JavaScript
-		wp_enqueue_script('jquery-ui');
-		wp_enqueue_script('chosen');
-
-		// Enqueue the required Admin scripts
-		wp_enqueue_script(static::$plugin_slug . '-admin');
+			// JavaScript - Enqueue scripts required for plugin Admin page
+			// Enqueue the required Admin scripts
+			wp_enqueue_script(static::$plugin_slug . '-admin');
+		}
 	}
 
+
 	/**
-	 * Loads Styles and JavaScript for the Frontend.
+	 * Loads Styles and JavaScript for the frontend. Extend as needed in
+	 * descendant classes.
 	 */
 	public function load_frontend_scripts() {
 		// Enqueue the required Frontend stylesheets
-		wp_enqueue_style(static::$plugin_slug . '-frontend');
+		//wp_enqueue_style(static::$plugin_slug . '-frontend');
 
 		// JavaScript
-		wp_enqueue_script(static::$plugin_slug . '-frontend');
+		//wp_enqueue_script(static::$plugin_slug . '-frontend');
 	}
 
 	/**
