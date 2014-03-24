@@ -22,7 +22,7 @@ require_once('general_functions.php');
  */
 class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	// @var string The plugin version.
-	public static $version = '0.7.3';
+	public static $version = '0.8.1';
 
 	// @var string The plugin slug
 	public static $plugin_slug = 'wc-aelia-plugin';
@@ -99,6 +99,17 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	 */
 	public static function instance() {
 		return $GLOBALS[static::$plugin_slug];
+	}
+
+	/**
+	 * Returns the plugin path.
+	 *
+	 * @return string
+	 */
+	public static function plugin_path() {
+		$reflection_class = new ReflectionClass(get_called_class());
+
+		return dirname($reflection_class->getFileName());
 	}
 
 	/**
