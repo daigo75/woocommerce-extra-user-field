@@ -37,7 +37,7 @@ class WC_Aelia_Template_Plugin extends WC_Aelia_Plugin {
 		//																						 $settings_page_renderer);
 		//$messages_controller = new WC_Aelia_Messages();
 
-		$plugin_instance = new WC_Aelia_Template_Plugin($settings_controller, $messages_controller);
+		$plugin_instance = new self($settings_controller, $messages_controller);
 		return $plugin_instance;
 	}
 
@@ -49,8 +49,8 @@ class WC_Aelia_Template_Plugin extends WC_Aelia_Plugin {
 	 * @param WC_Aelia_Messages messages_controller The controller that will handle
 	 * the messages produced by the plugin.
 	 */
-	public function __construct(WC_Aelia_Settings $settings_controller,
-															WC_Aelia_Messages $messages_controller) {
+	public function __construct($settings_controller,
+															$messages_controller) {
 		// Load Composer autoloader
 		require_once(__DIR__ . '/vendor/autoload.php');
 
