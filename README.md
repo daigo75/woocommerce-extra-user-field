@@ -1,4 +1,4 @@
-WooCommerce Authipay Gateway Plugin
+WooCommerce Template Plugin
 ===
 **Tags**: woocommerce, authipay, authipay connect
 **Requires at least**: 3.4
