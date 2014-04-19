@@ -16,7 +16,7 @@ class Aelia_SessionManager {
 	 * @param mixed value The value to set.
 	 */
 	public static function set_value($key, $value) {
-		global $woocommerce;
+		$woocommerce = WC();
 
 		// WooCommerce 2.1
 		if(version_compare($woocommerce->version, '2.1', '>=')) {
@@ -49,7 +49,7 @@ class Aelia_SessionManager {
 	 * @return mixed The value associated with the key, or the default.
 	 */
 	public static function get_value($key, $default = null, $remove_after_get = false) {
-		global $woocommerce;
+		$woocommerce = WC();
 
 		$result = null;
 
@@ -88,7 +88,7 @@ class Aelia_SessionManager {
 	 * @param string key The Key of the value to retrieve.
 	 */
 	public static function delete_value($key) {
-		global $woocommerce;
+		$woocommerce = WC();
 
 		// WooCommerce 2.1
 		if(version_compare($woocommerce->version, '2.1', '>=')) {

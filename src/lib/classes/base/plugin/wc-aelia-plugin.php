@@ -22,7 +22,7 @@ require_once('general_functions.php');
  */
 class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	// @var string The plugin version.
-	public static $version = '0.8.1';
+	public static $version = '0.8.2';
 
 	// @var string The plugin slug
 	public static $plugin_slug = 'wc-aelia-plugin';
@@ -58,8 +58,7 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	 * @return object The global instance of woocommerce.
 	 */
 	protected function woocommerce() {
-		global $woocommerce;
-		return $woocommerce;
+		return WC();
 	}
 
 	/**

@@ -60,3 +60,18 @@ if(!function_exists('coalesce')) {
 		return null;
 	}
 }
+
+if(!function_exists('WC')) {
+	/**
+	 * Returns the WooCommerce instance. This function already exists in WooCommerce
+	 * 2.1, 2.0 doesn't have it.
+	 *
+	 * @return object
+	 */
+	function WC() {
+		// If we need to declared this function, it means that we are in
+		// WooCommerce 2.0
+		global $woocommerce;
+		return $woocommerce;
+	}
+}
