@@ -58,7 +58,8 @@ class WC_Aelia_Plugin implements IWC_Aelia_Plugin {
 	 * @return object The global instance of woocommerce.
 	 */
 	protected function woocommerce() {
-		return WC();
+		global $woocommerce;
+		return $woocommerce;
 	}
 
 	/**
