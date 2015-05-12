@@ -71,7 +71,7 @@ $required_plugins = array(
 
 enable_required_plugins($required_plugins);
 
-printf("Loading main plugin file: %s...\n", __DIR__ . '/../plugin-main.php');
+printf("Loading main plugin file: %s...\n", __DIR__ . '/../plugin-template.php');
 // Load main plugin file
-require(__DIR__ . '/../plugin-main.php');
+require(__DIR__ . '/../plugin-template.php');
 echo "Main plugin file loaded.\n";
