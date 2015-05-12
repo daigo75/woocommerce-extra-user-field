@@ -133,4 +133,4 @@ class PLUGIN_CLASS_NAME extends Aelia_Plugin {
 	}
 }
 
-$GLOBALS[PLUGIN_CLASS_NAME_Plugin::$plugin_slug] = PLUGIN_CLASS_NAME_Plugin::factory();
+$GLOBALS[PLUGIN_CLASS_NAME::$plugin_slug] = PLUGIN_CLASS_NAME::factory();
