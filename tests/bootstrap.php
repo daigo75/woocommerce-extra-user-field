@@ -45,14 +45,33 @@ error_reporting($error_reporting_original);
 // Load Composer Autoloader
 $composer_autoloader = realpath(__DIR__ . '/../src/vendor/autoload.php');
 if(file_exists($composer_autoloader)) {
+	printf("Loading Composer autoloader: %s...\n", $composer_autoloader);
   require_once $composer_autoloader;
-} else {
-   exit("Couldn't find path to composer autoloader. Expected location: '$composer_autoloader'.\n");
+	echo "Loaded.\n";
+}
+else {
+	exit("Couldn't find path to composer autoloader. Expected location: '$composer_autoloader'.\n");
+}
+
+// Load base test classes
+$required_test_files = array(
+	__DIR__ . '/base-unit-test-case.php',
+);
+foreach($required_test_files as $file_name) {
+	printf("Loading required test class from file: %s...\n", $file_name);
+	require $file_name;
+	echo "Loaded.\n";
 }
 
 // Try to activate all required plugins
 $required_plugins = array(
 	'woocommerce/woocommerce.php',
+	'wc-aelia-foundation-classes/wc-aelia-foundation-classes.php',
 );
 
 enable_required_plugins($required_plugins);
+
+printf("Loading main plugin file: %s...\n", __DIR__ . '/../woocommerce-eu-vat-assistant.php');
+// Load main plugin file
+require(__DIR__ . '/../woocommerce-eu-vat-assistant.php');
+echo "Main plugin file loaded.\n";

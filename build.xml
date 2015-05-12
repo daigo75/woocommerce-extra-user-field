@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="name-of-project" default="build">
+<project name="_PLUGIN_NAME_" default="build">
 	<property name="artifacts_dir" value="${basedir}/build" />
 	<property name="release_dir" value="${artifacts_dir}/release" />
 	<property name="wp_unit_plugins_dir" value="${wp_unit_dir}/wordpress/wp-content/plugins/" />
 
+	<property name="plugin_text_domain" value="wc-aelia-eu-vat-assistant" />
 	<target name="build"
+					depends="prepare,composer,lint,phploc,pdepend,phpmd-ci,phpcpd,phpdox,phpunit,phpcb,replace-text-domain,prepare-release"/>
+
+	<target name="build-quicktest"
+					depends="prepare,composer,phpunit,prepare-release"/>
+
+	<!-- Build plugin without replacing the text domain with constant string -->
+	<target name="build-no-text-domain-replace"
 					depends="prepare,composer,lint,phploc,pdepend,phpmd-ci,phpcpd,phpdox,phpunit,phpcb,prepare-release"/>
 
  <target name="build-parallel"
@@ -49,6 +57,7 @@
 		<!-- Install plugin dependencies -->
 		<echo message="Using WooCommerce plugin from ${woocommerce_plugin_dir}..." />
 		<property name="woocommerce_plugin_dir" value="${wordpress_plugins_dir}/${wc_plugin_dir}" />
+		<echo message="Using WooCommerce plugin from ${woocommerce_plugin_dir}..." />
 		<symlink link="${wp_unit_plugins_dir}/woocommerce"
 						 resource="${woocommerce_plugin_dir}"
 						 overwrite="true"
@@ -59,7 +68,7 @@
 	<target name="composer" depends="clean" description="Update external libraries">
 		<exec executable="php" dir="${basedir}/src" failonerror="true">
 			<arg value='/usr/local/bin/composer' />
-			<arg value='--dev' />
+			<arg value='--no-interaction' />
 			<arg value='install' />
 		</exec>
 	</target>
@@ -96,6 +105,7 @@
 			<arg value="--jdepend-xml=${basedir}/build/logs/jdepend.xml" />
 			<arg value="--jdepend-chart=${basedir}/build/pdepend/dependencies.svg" />
 			<arg value="--overview-pyramid=${basedir}/build/pdepend/overview-pyramid.svg" />
+			<arg value="--ignore=${basedir}/src/vendor/,${basedir}/tests/" />
 			<arg path="${basedir}/src" />
 		</exec>
 	</target>
@@ -107,7 +117,8 @@
 			<arg path="${basedir}/src" />
 			<arg value="text" />
 			<arg value="${basedir}/build/phpmd.xml" />
-			<arg value="--ignore=src/vendor/,tests/" />
+			<arg value="--exclude" />
+			<arg value="src/vendor/,tests/" />
 		</exec>
 	</target>
 
@@ -119,7 +130,8 @@
 			<arg value="${basedir}/build/phpmd.xml" />
 			<arg value="--reportfile" />
 			<arg value="${basedir}/build/logs/pmd.xml" />
-			<arg value="--ignore=src/vendor/,tests/" />
+			<arg value="--exclude" />
+			<arg value="src/vendor/,tests/" />
 		</exec>
 	</target>
 
@@ -149,11 +161,11 @@
 		<exec executable="phpcpd">
 			<arg value="--log-pmd" />
 			<arg value="${basedir}/build/logs/pmd-cpd.xml" />
+			<arg value="--exclude" />
+			<arg value="vendor" />
+			<arg value="--exclude" />
+			<arg value="tests" />
 			<arg path="${basedir}/src" />
-			<arg value="--exclude" />
-			<arg value="src/vendor/" />
-			<arg value="--exclude" />
-			<arg value="tests/" />
 		</exec>
 	</target>
 
@@ -186,8 +198,18 @@
 	<target name="composer-prepare-release" description="Update external libraries removing development packages">
 		<exec executable="php" dir="${basedir}/src" failonerror="true">
 			<arg value='/usr/local/bin/composer' />
+			<arg value='--no-interaction' />
+			<arg value='--no-dev' />
 			<arg value='install' />
 		</exec>
+	</target>
+
+	<!-- Prepare release files -->
+	<target name="replace-text-domain" description="Replace text domain variables and constants with the text domain string">
+		<replaceregexp match="__\(('.*?'),(.*?)text_?domain\)"
+									 replace="__(\1, '${plugin_text_domain}')" flags="gis">
+	    <fileset dir="${basedir}/src" includes="**/*.php"/>
+		</replaceregexp>
 	</target>
 
 	<!-- Prepare release files -->
@@ -208,7 +230,7 @@
 		<!-- Compress files into a release package -->
 		<property name="compress_source_dir" value="${release_temp_dir}" />
 		<property name="compress_includes" value="${plugin_name}/*.php, ${plugin_name}/*.md, ${plugin_name}/src/**" />
-		<property name="compress_excludes" value="**/tests/**" />
+		<property name="compress_excludes" value="**/tests/**, */documentation/*.json" />
 
 
 		<!-- Debug
