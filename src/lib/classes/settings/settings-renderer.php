@@ -1,5 +1,5 @@
 <?php
-namespace Aelia\WC\PLUGIN_NAMESPACE;
+namespace PLUGIN_NAMESPACE;
 if(!defined('ABSPATH')) exit; // Exit if accessed directly
 
 /**

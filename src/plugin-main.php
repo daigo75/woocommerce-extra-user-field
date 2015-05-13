@@ -1,5 +1,5 @@
 <?php
-namespace Aelia\WC\PLUGIN_NAMESPACE;
+namespace PLUGIN_NAMESPACE;
 if(!defined('ABSPATH')) exit; // Exit if accessed directly
 
 //define('SCRIPT_DEBUG', 1);
@@ -9,9 +9,9 @@ require_once('lib/classes/definitions/definitions.php');
 
 use Aelia\WC\Aelia_Plugin;
 use Aelia\WC\Aelia_SessionManager;
-use Aelia\WC\PLUGIN_NAMESPACE\Settings;
-use Aelia\WC\PLUGIN_NAMESPACE\Settings_Renderer;
-use Aelia\WC\PLUGIN_NAMESPACE\Messages;
+use PLUGIN_NAMESPACE\Settings;
+use PLUGIN_NAMESPACE\Settings_Renderer;
+use PLUGIN_NAMESPACE\Messages;
 
 /**
  * Main plugin class.
