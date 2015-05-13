@@ -61,6 +61,7 @@ module.exports = function(grunt) {
   grunt.registerTask('default', [
 		'string-replace:plugin-tokens',
 		'string-replace:main-plugin-file-references'
-		//'rename:main-plugin-file',
+		// The "rename" task ignores the dry run parameter. Comment it out for debugging
+		'rename:main-plugin-file',
 	]);
 };
