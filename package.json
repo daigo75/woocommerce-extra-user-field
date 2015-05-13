@@ -21,7 +21,7 @@
   "bugs": "https://github.com/aelia-co/WooCommerce-Plugin-Template/issues",
   "plugin_info": {
     "PLUGIN_NAME": "WooCommerce Template Plugin",
-    "PLUGIN_NAMESPACE": "Aelia\\WC\\WC_Template_Plugin",
+    "PLUGIN_NSPACE": "Aelia\\WC\\WC_Template_Plugin",
     "PLUGIN_CLASS_NAME": "WC_Template_Plugin",
     "PLUGIN_SLUG_VALUE": "woocommerce-template-plugin",
     "PLUGIN_MENU_SLUG": "wc_template_plugin",

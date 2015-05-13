@@ -1,5 +1,5 @@
 <?php
-namespace PLUGIN_NAMESPACE;
+namespace PLUGIN_NSPACE;
 if(!defined('ABSPATH')) exit; // Exit ifaccessed directly
 
 /**
