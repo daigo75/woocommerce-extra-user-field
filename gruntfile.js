@@ -6,7 +6,7 @@ module.exports = function(grunt) {
 			// Replace each plugin token with the corresponding value from configuration
 			'plugin-tokens': {
 				files: {
-					'./': ['plugin-template.php'],
+					'./': ['*', 'src/**', 'tests/**', '!*.log', '!package.json', '!gruntfile.js', '!.git*', '!.git/**']
 				},
 				options: {
 					replacements: [
@@ -21,8 +21,8 @@ module.exports = function(grunt) {
 								plugin_info['PLUGIN_AUTH_URI'] = ('url' in config.author) ? config.author.url : '';
 								plugin_info['PLUGIN_LICENSE'] = config.license;
 
-								//grunt.log.writeln("MATCH: " + match);
-								//grunt.log.writeln("P1: " + p1);
+								grunt.log.writeln("MATCH: " + p1);
+								grunt.log.writeln("REPLACEMENT: " + (match in plugin_info) ? plugin_info[match] : ("NOT_FOUND_" + match));
 								return (match in plugin_info) ? plugin_info[match] : ("NOT_FOUND_" + match);
 							}
 						}
@@ -33,7 +33,7 @@ module.exports = function(grunt) {
 			// of the main plugin file (see rename:main-plugin-file task).
 			'main-plugin-file-references': {
 				files: {
-					'./': ['src/**', 'tests/**'],
+					'./': ['src/**', 'tests/**', '!*.log', '!package.json', '!gruntfile.js', '!.git*', '!.git/**']
 				},
 				options: {
 					replacements: [
@@ -60,7 +60,7 @@ module.exports = function(grunt) {
 	// Default task(s).
   grunt.registerTask('default', [
 		'string-replace:plugin-tokens',
-		'string-replace:main-plugin-file-references',
-		'rename:main-plugin-file',
+		'string-replace:main-plugin-file-references'
+		//'rename:main-plugin-file',
 	]);
 };
