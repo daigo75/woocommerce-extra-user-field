@@ -1,9 +1,11 @@
 {
-  "name": "WooCommerce Template plugin",
+  "name": "woocommerce-template-plugin",
   "description": "A template for WooCommerce Plugins",
   "version": "0.1.0",
+  "license": "GPL-3.0",
   "devDependencies": {
     "grunt": "~0.4.5",
+    "grunt-rename": "^0.1.4",
     "grunt-string-replace": "^1.2.0"
   },
   "repository": {
@@ -11,22 +13,23 @@
     "url": "https://github.com/aelia-co/WooCommerce-Plugin-Template.git"
   },
   "homepage": "http://aelia.co",
-	"author": {
-		"name": "Diego Zanella",
-		"email": "admin@aelia.co",
-		"url": "http://aelia.co"
-	},
-	"bugs": "https://github.com/aelia-co/WooCommerce-Plugin-Template/issues",
-
-	"plugin_info": {
-		"PLUGIN_NAMESPACE": "Aelia\\WC\\WC_Template_Plugin",
-		"PLUGIN_CLASS_NAME": "WC_Template_Plugin",
-		"PLUGIN_SLUG_VALUE": "wc-template-plugin",
-		"PLUGIN_MENU_SLUG": "wc_template_plugin",
-		"PLUGIN_TEXT_DOMAIN": "wc-template-plugin",
-		"PLUGIN_SUPPORT_URL": "https://github.com/aelia-co/WooCommerce-Plugin-Template/issues",
-		"PLUGIN_CONTACT_URL": "https://github.com/aelia-co/WooCommerce-Plugin-Template/issues",
-		"PLUGIN_SETTINGS_KEY": "wc-template-plugin",
-		"PLUGIN_FILTER_PREFIX": "wc_template"
-	}
+  "author": {
+    "name": "Diego Zanella",
+    "email": "admin@aelia.co",
+    "url": "http://aelia.co"
+  },
+  "bugs": "https://github.com/aelia-co/WooCommerce-Plugin-Template/issues",
+  "plugin_info": {
+    "PLUGIN_NAME": "WooCommerce Template Plugin",
+    "PLUGIN_NAMESPACE": "Aelia\\WC\\WC_Template_Plugin",
+    "PLUGIN_CLASS_NAME": "WC_Template_Plugin",
+    "PLUGIN_SLUG_VALUE": "woocommerce-template-plugin",
+    "PLUGIN_MENU_SLUG": "wc_template_plugin",
+    "PLUGIN_TEXT_DOMAIN": "wc-template-plugin",
+    "PLUGIN_SUPPORT_URL": "https://github.com/aelia-co/WooCommerce-Plugin-Template/issues",
+    "PLUGIN_CONTACT_URL": "https://github.com/aelia-co/WooCommerce-Plugin-Template/issues",
+    "PLUGIN_SETTINGS_KEY": "wc-template-plugin",
+    "PLUGIN_FILTER_PREFIX": "wc_template",
+		"PLUGIN_TAGS": ""
+  }
 }
