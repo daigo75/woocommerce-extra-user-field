@@ -11,9 +11,9 @@ class PLUGIN_CLASS_Test extends WP_UnitTestCase {
 		parent::setUp();
 
 		// Load main plugin file autoloader
-		require_once(__DIR__ . '/../PLUGIN_SLUG.php');
-		if(is_object($GLOBALS['PLUGIN_SLUG'])) {
-			$this->plugin_instance = $GLOBALS['PLUGIN_SLUG'];
+		require_once(__DIR__ . '/../plugin-template.php');
+		if(is_object($GLOBALS['PLUGIN_SLUG_VALUE'])) {
+			$this->plugin_instance = $GLOBALS['PLUGIN_SLUG_VALUE'];
 		}
 	}
 
