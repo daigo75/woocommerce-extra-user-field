@@ -3,8 +3,8 @@
 /**
  * Tests for the PLUGIN_CLASS class.
  */
-class PLUGIN_CLASS_Test extends WP_UnitTestCase {
-	// @var PLUGIN_CLASS An instance of the the EU VAT Assistant plugin.
+class PLUGIN_CLASS_NAME_Test extends WP_UnitTestCase {
+	// @var PLUGIN_CLASS_NAME An instance of the plugin being tested.
 	protected $plugin_instance;
 
 	public function setUp() {
@@ -35,7 +35,7 @@ class PLUGIN_CLASS_Test extends WP_UnitTestCase {
 	 * Tests that the plugin class was loaded correctly.
 	 */
 	public function test_class_loaded() {
-		$this->assertTrue(class_exists('\Aelia\WC\PLUGIN_NAMESPACE\PLUGIN_CLASS_NAME', false),
+		$this->assertTrue(class_exists('\PLUGIN_NAMESPACE\PLUGIN_CLASS_NAME', false),
 											'Plugin class does not exist. ' . $this->get_check_requirements_message());
 	}
 
@@ -43,7 +43,7 @@ class PLUGIN_CLASS_Test extends WP_UnitTestCase {
 	 * Checks that the plugin class was instantiated.
 	 */
 	public function test_plugin_loaded() {
-		$this->assertInstanceOf('\Aelia\WC\PLUGIN_NAMESPACE\PLUGIN_CLASS_NAME', $this->plugin_instance,
+		$this->assertInstanceOf('\PLUGIN_NAMESPACE\PLUGIN_CLASS_NAME', $this->plugin_instance,
 														'Plugin class was not loaded. ' . $this->get_check_requirements_message());
 	}
 }
