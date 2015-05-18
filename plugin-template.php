@@ -2,8 +2,12 @@
 /*
 Plugin Name: PLUGIN_NAME
 Description: PLUGIN_DESCRIPTION
-Author: PLUGIN_AUTHOR
+Plugin URI: PLUGIN_URI
 Version: PLUGIN_VERSION
+Author: PLUGIN_AUTHOR
+Author URI: PLUGIN_AUTH_URI
+Text Domain: PLUGIN_TEXT_DOMAIN
+License: PLUGIN_LICENSE
 */
 
 require_once(dirname(__FILE__) . '/src/lib/classes/install/plugin-requirementscheck.php');

@@ -17,6 +17,7 @@ module.exports = function(grunt) {
 								var plugin_info = config.plugin_info;
 								plugin_info['PLUGIN_DESCRIPTION'] = config.description;
 								plugin_info['PLUGIN_VERSION'] = config.version;
+								plugin_info['PLUGIN_URI'] = config.homepage;
 								plugin_info['PLUGIN_AUTHOR'] = config.author.name;
 								plugin_info['PLUGIN_AUTH_URI'] = ('url' in config.author) ? config.author.url : '';
 								plugin_info['PLUGIN_LICENSE'] = config.license;
