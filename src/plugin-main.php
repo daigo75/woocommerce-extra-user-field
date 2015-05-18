@@ -34,14 +34,15 @@ class PLUGIN_CLASS_NAME extends Aelia_Plugin {
 
 		// Settings and messages classes are loaded from the same namespace as the
 		// plugin
-		//$settings_page_renderer = new Settings_Renderer();
-		//$settings_controller = new Settings(Settings::SETTINGS_KEY,
-		//																		self::$text_domain,
-		//																		$settings_page_renderer);
+		$settings_page_renderer = new Settings_Renderer();
+		$settings_controller = new Settings(Settings::SETTINGS_KEY,
+																				self::$text_domain,
+																				$settings_page_renderer);
 		$messages_controller = new Messages();
 
 		$class = get_called_class();
-		$plugin_instance = new $class(null, $messages_controller);
+		// Replace $settings_controller with NULL if the plugin doesn't have settings
+		$plugin_instance = new $class($settings_controller, $messages_controller);
 		return $plugin_instance;
 	}
 
