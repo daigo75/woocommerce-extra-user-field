@@ -1,3 +1,6 @@
 /* CSS Styles for Admin pages */
 
-/* TODO Add CSS styles for Admin elements */
+.wc-aelia-plugin-settings .buttons {
+	margin-top: 1em;
+}
+
