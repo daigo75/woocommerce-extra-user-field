@@ -22,8 +22,9 @@ module.exports = function(grunt) {
 								plugin_info['PLUGIN_AUTH_URI'] = ('url' in config.author) ? config.author.url : '';
 								plugin_info['PLUGIN_LICENSE'] = config.license;
 
-								grunt.log.writeln("MATCH: " + p1);
-								grunt.log.writeln("REPLACEMENT: " + (match in plugin_info) ? plugin_info[match] : ("NOT_FOUND_" + match));
+								// Debug
+								//grunt.log.writeln("MATCH: " + p1);
+								//grunt.log.writeln("REPLACEMENT: " + (match in plugin_info) ? plugin_info[match] : ("NOT_FOUND_" + match));
 								return (match in plugin_info) ? plugin_info[match] : ("NOT_FOUND_" + match);
 							}
 						}
