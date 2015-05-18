@@ -6,7 +6,7 @@ module.exports = function(grunt) {
 			// Replace each plugin token with the corresponding value from configuration
 			'plugin-tokens': {
 				files: {
-					'./': ['*', 'src/**', 'tests/**', '!*.log', '!package.json', '!gruntfile.js', '!.git*', '!.git/**']
+					'./': ['*', 'src/**', 'tests/**', 'build/**', '!*.log', '!package.json', '!gruntfile.js', '!.git*', '!.git/**']
 				},
 				options: {
 					replacements: [

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Tests for the PLUGIN_CLASS class.
+ * Tests for the PLUGIN_CLASS_NAME class.
  */
 class PLUGIN_CLASS_NAME_Test extends WP_UnitTestCase {
 	// @var PLUGIN_CLASS_NAME An instance of the plugin being tested.
