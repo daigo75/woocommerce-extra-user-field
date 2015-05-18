@@ -114,6 +114,13 @@ class PLUGIN_CLASS_NAME extends Aelia_Plugin {
 		//									null,
 		//									'all');
 
+		//wp_enqueue_style('jquery-ui');
+		//wp_enqueue_style('chosen');
+
+		//wp_enqueue_script('jquery-ui-tabs');
+		//wp_enqueue_script('jquery-ui-sortable');
+		//wp_enqueue_script('chosen');
+
 		parent::register_plugin_admin_scripts();
 	}
 
