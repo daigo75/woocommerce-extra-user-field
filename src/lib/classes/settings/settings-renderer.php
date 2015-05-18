@@ -128,7 +128,7 @@ class Settings_Renderer extends \Aelia\WC\Settings_Renderer {
 	 */
 	protected function page_title() {
 		return __('Page description. Change it in <code>Settings_Renderer::page_title()</code>', $this->_textdomain) .
-					 sprintf('&nbsp;(v. %s)', PLUGIN_CLASS_NAME_Plugin::$version);
+					 sprintf('&nbsp;(v. %s)', PLUGIN_CLASS_NAME::$version);
 	}
 
 	/**
