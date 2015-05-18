@@ -8,4 +8,6 @@ jQuery(document).ready(function($) {
 	//if(!$settings_form.length) {
 	//	return;
 	//}
+	// Display tabbed interface
+	//$settings_form.find('.tabs').tabs();
 });
