@@ -40,7 +40,7 @@ module.exports = function(grunt) {
 				options: {
 					replacements: [
 						{
-							pattern: 'plugin-template.php',
+							pattern: /plugin\-template\.php/g,
 							replacement: '<%= pkg.plugin_info["PLUGIN_SLUG_VALUE"] %>.php'
 						}
 					]
