@@ -1,6 +1,6 @@
-=== WooCommerce EU VAT Assistant ===
+=== PLUGIN_NAME ===
 Requires at least: 3.6
-Tested up to: 4.1
+Tested up to: 4.2
 Stable tag: PLUGIN_VERSION
 Tags: PLUGIN_TAGS
 License: PLUGIN_LICENSE
@@ -12,6 +12,8 @@ PLUGIN_DESCRIPTION
 *** Write extended description here ***
 
 = Requirements =
+
+*** Describe requirements here ***
 
 * WordPress 3.6 or later.
 * PHP 5.3 or later.
