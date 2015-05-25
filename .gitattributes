@@ -1,4 +1,7 @@
 # Auto detect text files and perform LF normalization
 *        text=auto
-*.sh -crlf
-*.json -crlf
+
+# Enforce native line endings
+*.js text
+*.sh text
+*.json text
