@@ -2,6 +2,6 @@
 *        text=auto
 
 # Enforce native line endings
-*.js text
-*.sh text
-*.json text
+*.js text eol=lf
+*.sh text eol=lf
+*.json text eol=lf
