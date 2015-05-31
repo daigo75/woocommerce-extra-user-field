@@ -6,11 +6,11 @@ require_once('aelia-wc-requirementscheck.php');
 /**
  * Checks that plugin's requirements are met.
  */
-class PLUGIN_CLASS_NAME_RequirementsChecks extends Aelia_WC_RequirementsChecks {
+class WC_Extra_User_Field_RequirementsChecks extends Aelia_WC_RequirementsChecks {
 	// @var string The namespace for the messages displayed by the class.
-	protected $text_domain = 'PLUGIN_TEXT_DOMAIN';
+	protected $text_domain = 'woocommerce-extra-user-field';
 	// @var string The plugin for which the requirements are being checked. Change it in descendant classes.
-	protected $plugin_name = 'PLUGIN_NAME';
+	protected $plugin_name = 'WooCommerce Extra User Field';
 
 	// @var array An array of WordPress plugins (name => version) required by the plugin.
 	protected $required_plugins = array(

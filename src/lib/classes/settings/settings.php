@@ -1,5 +1,5 @@
 <?php
-namespace PLUGIN_NSPACE;
+namespace Aelia\WC\WC_Extra_User_Field;
 if(!defined('ABSPATH')) exit; // Exit ifaccessed directly
 
 /**
@@ -9,7 +9,7 @@ if(!defined('ABSPATH')) exit; // Exit ifaccessed directly
 class Settings extends \Aelia\WC\Settings {
 	/*** Settings Key ***/
 	// @var string The key to identify plugin settings amongst WP options.
-	const SETTINGS_KEY = 'PLUGIN_SETTINGS_KEY';
+	const SETTINGS_KEY = 'woocommerce-extra-user-field';
 
 	/*** Settings fields ***/
 
@@ -61,7 +61,7 @@ class Settings extends \Aelia\WC\Settings {
 		}
 
 		// Return the array processing any additional functions filtered by this action.
-		return apply_filters('PLUGIN_FILTER_PREFIX_settings', $processed_settings, $settings);
+		return apply_filters('wc_aelia_euf_settings', $processed_settings, $settings);
 	}
 
 	/**

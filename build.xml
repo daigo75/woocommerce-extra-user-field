@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="PLUGIN_NAME" default="build">
+<project name="WooCommerce Extra User Field" default="build">
 	<property name="artifacts_dir" value="${basedir}/build" />
 	<property name="release_dir" value="${artifacts_dir}/release" />
 	<property name="wp_unit_plugins_dir" value="${wp_unit_dir}/wordpress/wp-content/plugins/" />

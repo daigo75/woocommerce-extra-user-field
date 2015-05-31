@@ -1,6 +1,6 @@
 {
-  "name": "woocommerce-template-plugin",
-  "description": "A template for WooCommerce Plugins",
+  "name": "woocommerce-extra-user-field",
+  "description": "Adds a custom field to user profiles, allowing Admins to alter and export it with WooCommerce orders",
   "version": "0.1.0",
   "license": "GPL-3.0",
   "devDependencies": {
@@ -10,26 +10,26 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/aelia-co/WooCommerce-Plugin-Template.git"
+    "url": "https://github.com/aelia-co/woocommerce-extra-user-field.git"
   },
   "homepage": "http://aelia.co",
   "author": {
-    "name": "Diego Zanella",
+    "name": "Aelia",
     "email": "admin@aelia.co",
     "url": "http://aelia.co"
   },
-  "bugs": "https://github.com/aelia-co/WooCommerce-Plugin-Template/issues",
+  "bugs": "https://github.com/aelia-co/woocommerce-extra-user-field/issues",
   "plugin_info": {
-    "PLUGIN_NAME": "WooCommerce Template Plugin",
-    "PLUGIN_NSPACE": "Aelia\\WC\\WC_Template_Plugin",
-    "PLUGIN_CLASS_NAME": "WC_Template_Plugin",
-    "PLUGIN_SLUG_VALUE": "woocommerce-template-plugin",
-    "PLUGIN_MENU_SLUG": "wc_template_plugin",
-    "PLUGIN_TEXT_DOMAIN": "wc-template-plugin",
-    "PLUGIN_SUPPORT_URL": "https://github.com/aelia-co/WooCommerce-Plugin-Template/issues",
-    "PLUGIN_CONTACT_URL": "https://github.com/aelia-co/WooCommerce-Plugin-Template/issues",
-    "PLUGIN_SETTINGS_KEY": "wc-template-plugin",
-    "PLUGIN_FILTER_PREFIX": "wc_template",
-    "PLUGIN_TAGS": ""
+    "PLUGIN_NAME": "WooCommerce Extra User Field",
+    "PLUGIN_NSPACE": "Aelia\\WC\\WC_Extra_User_Field",
+    "PLUGIN_CLASS_NAME": "WC_Extra_User_Field",
+    "PLUGIN_SLUG_VALUE": "woocommerce-extra-user-field",
+    "PLUGIN_MENU_SLUG": "wc_extra_user_field",
+    "PLUGIN_TEXT_DOMAIN": "woocommerce-extra-user-field",
+    "PLUGIN_SUPPORT_URL": "https://github.com/aelia-co/woocommerce-extra-user-field/issues",
+    "PLUGIN_CONTACT_URL": "https://github.com/aelia-co/woocommerce-extra-user-field/issues",
+    "PLUGIN_SETTINGS_KEY": "woocommerce-extra-user-field",
+    "PLUGIN_FILTER_PREFIX": "wc_aelia_euf",
+    "PLUGIN_TAGS": "custom"
   }
 }

@@ -1,7 +1,7 @@
 <?php
-namespace PLUGIN_NSPACE;
+namespace Aelia\WC\WC_Extra_User_Field;
 if(!defined('ABSPATH')) exit; // Exit if accessed directly
 
-class PLUGIN_CLASS_NAME_Install extends \Aelia\WC\Aelia_Install {
+class WC_Extra_User_Field_Install extends \Aelia\WC\Aelia_Install {
 	// Dummy Installer class
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
-<ruleset name="PLUGIN_NAME">
- <description>PLUGIN_NAME Coding Standard</description>
+<ruleset name="WooCommerce Extra User Field">
+ <description>WooCommerce Extra User Field Coding Standard</description>
  <rule ref="WordPress" />
  <rule ref="Generic.PHP.DisallowShortOpenTag" />
 </ruleset>

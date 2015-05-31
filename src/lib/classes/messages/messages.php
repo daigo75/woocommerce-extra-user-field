@@ -1,5 +1,5 @@
 <?php
-namespace PLUGIN_NSPACE;
+namespace Aelia\WC\WC_Extra_User_Field;
 if(!defined('ABSPATH')) exit; // Exit if accessed directly
 
 use \WP_Error;

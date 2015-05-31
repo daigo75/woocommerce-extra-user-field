@@ -1,5 +1,5 @@
 <?php
-namespace PLUGIN_NSPACE;
+namespace Aelia\WC\WC_Extra_User_Field;
 if(!defined('ABSPATH')) exit; // Exit if accessed directly
 
 //define('SCRIPT_DEBUG', 1);
@@ -9,19 +9,19 @@ require_once('lib/classes/definitions/definitions.php');
 
 use Aelia\WC\Aelia_Plugin;
 use Aelia\WC\Aelia_SessionManager;
-use PLUGIN_NSPACE\Settings;
-use PLUGIN_NSPACE\Settings_Renderer;
-use PLUGIN_NSPACE\Messages;
+use Aelia\WC\WC_Extra_User_Field\Settings;
+use Aelia\WC\WC_Extra_User_Field\Settings_Renderer;
+use Aelia\WC\WC_Extra_User_Field\Messages;
 
 /**
  * Main plugin class.
  **/
-class PLUGIN_CLASS_NAME extends Aelia_Plugin {
-	public static $version = 'PLUGIN_VERSION';
+class WC_Extra_User_Field extends Aelia_Plugin {
+	public static $version = '0.1.0';
 
 	public static $plugin_slug = Definitions::PLUGIN_SLUG;
 	public static $text_domain = Definitions::TEXT_DOMAIN;
-	public static $plugin_name = 'PLUGIN_DESCRIPTION';
+	public static $plugin_name = 'Adds a custom field to user profiles, allowing Admins to alter and export it with WooCommerce orders';
 
 	/**
 	 * Factory method.
@@ -141,4 +141,4 @@ class PLUGIN_CLASS_NAME extends Aelia_Plugin {
 	}
 }
 
-$GLOBALS[PLUGIN_CLASS_NAME::$plugin_slug] = PLUGIN_CLASS_NAME::factory();
+$GLOBALS[WC_Extra_User_Field::$plugin_slug] = WC_Extra_User_Field::factory();

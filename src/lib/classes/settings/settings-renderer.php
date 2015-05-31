@@ -1,5 +1,5 @@
 <?php
-namespace PLUGIN_NSPACE;
+namespace Aelia\WC\WC_Extra_User_Field;
 if(!defined('ABSPATH')) exit; // Exit if accessed directly
 
 /**
@@ -7,10 +7,10 @@ if(!defined('ABSPATH')) exit; // Exit if accessed directly
  */
 class Settings_Renderer extends \Aelia\WC\Settings_Renderer {
 	// @var string The URL to the support portal.
-	const SUPPORT_URL = 'PLUGIN_SUPPORT_URL';
+	const SUPPORT_URL = 'https://github.com/aelia-co/woocommerce-extra-user-field/issues';
 	//const SUPPORT_URL = 'http://aelia.freshdesk.com/support/home';
 	// @var string The URL to the contact form for general enquiries.
-	const CONTACT_URL = 'PLUGIN_CONTACT_URL';
+	const CONTACT_URL = 'https://github.com/aelia-co/woocommerce-extra-user-field/issues';
 	//const CONTACT_URL = 'http://aelia.co/contact/';
 
 	/*** Settings Tabs ***/
@@ -108,7 +108,7 @@ class Settings_Renderer extends \Aelia\WC\Settings_Renderer {
 	 * @return string
 	 */
 	protected function menu_title() {
-		return __('PLUGIN_NAME', $this->_textdomain);
+		return __('WooCommerce Extra User Field', $this->_textdomain);
 	}
 
 	/**
@@ -128,7 +128,7 @@ class Settings_Renderer extends \Aelia\WC\Settings_Renderer {
 	 */
 	protected function page_title() {
 		return __('Page description. Change it in <code>Settings_Renderer::page_title()</code>', $this->_textdomain) .
-					 sprintf('&nbsp;(v. %s)', PLUGIN_CLASS_NAME::$version);
+					 sprintf('&nbsp;(v. %s)', WC_Extra_User_Field::$version);
 	}
 
 	/**

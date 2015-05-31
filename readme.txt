@@ -1,11 +1,11 @@
-=== PLUGIN_NAME ===
+=== WooCommerce Extra User Field ===
 Requires at least: 3.6
 Tested up to: 4.2
-Stable tag: PLUGIN_VERSION
-Tags: PLUGIN_TAGS
-License: PLUGIN_LICENSE
+Stable tag: 0.1.0
+Tags: custom
+License: GPL-3.0
 
-PLUGIN_DESCRIPTION
+Adds a custom field to user profiles, allowing Admins to alter and export it with WooCommerce orders
 
 == Description ==
 
@@ -40,5 +40,5 @@ For more information about installation and management of plugins, please refer 
 
 *** Write change log here ***
 
-= PLUGIN_VERSION =
+= 0.1.0 =
 * First plugin draft.
